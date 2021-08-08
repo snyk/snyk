@@ -35,7 +35,7 @@ import {
 } from 'snyk-docker-plugin/dist';
 import { ScanResult } from '../../ecosystems/types';
 
-export function formatJsonOutput(jsonData, options: Options) {
+function formatJsonOutput(jsonData, options: Options) {
   const jsonDataClone = cloneDeep(jsonData);
 
   if (options['group-issues']) {
