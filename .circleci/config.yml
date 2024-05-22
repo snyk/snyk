@@ -1013,6 +1013,7 @@ jobs:
 
   test-legacy-tap:
     executor: docker-amd64
+    resource_class: xlarge
     parallelism: 3
     steps:
       - prepare-workspace
