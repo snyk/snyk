@@ -1025,7 +1025,7 @@ jobs:
           command: >
             npx tap -j 1 -C --timeout=300 -R junit --reporter-file=tap-junit.xml
             --allow-incomplete-coverage
-            $(circleci tests glob "test/tap/*.test.*" | circleci tests split --split-by=timings)
+            $(circleci tests glob "test/tap/*.test.*" | circleci tests split)
       - store_test_results:
           path: tap-junit.xml
 
