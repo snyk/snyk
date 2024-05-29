@@ -27,6 +27,7 @@ export async function test(
 
   try {
     const scanResult = await testLib.test(testConfig);
+    console.log(JSON.stringify(scanResult, null, 2))
 
     return buildOutput({
       scanResult,

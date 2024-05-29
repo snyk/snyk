@@ -5,6 +5,7 @@
     "rootDir": "./src"
   },
   "include": ["./src/**/*"],
+  "sourceMap": true,
   "references": [
     { "path": "packages/snyk-protect" },
     { "path": "packages/snyk-fix" }
