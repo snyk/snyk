@@ -2,6 +2,15 @@
 
 The Snyk CLI is being deployed to different deployment channels, users can select the stability level according to their needs. For details please see [this documentation](https://docs.snyk.io/snyk-cli/releases-and-channels-for-the-snyk-cli)
 
+### News
+
+This Snyk CLI release candidate delivers an assortment of bug fixes and improvements.
+
+- We've added support for pnpm, giving you more flexibility in your project setup.
+- You can now scan npm/yarn projects even without lockfiles, ensuring comprehensive vulnerability detection regardless of your dependency management approach.
+- Experience smoother and faster code scanning with the introduction of incremental scanning.
+- We're committed to strengthening security. This release includes redaction of additional sensitive data in debug logs, minimizing potential risks.
+
 ### Features
 
 - **test:** Added pnpm support under 'enablePnpmCli' feature flag ([#5181](https://github.com/snyk/snyk/issues/5181)) ([46769cc](https://github.com/snyk/snyk/commit/46769ccefc0c9ca98a44ad4bdd2b4d8161294dbf))
