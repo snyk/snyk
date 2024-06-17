@@ -8,8 +8,9 @@ This Snyk CLI release candidate delivers an assortment of bug fixes and improvem
 
 - We've added support for pnpm, giving you more flexibility in your project setup.
 - You can now scan npm/yarn projects even without lockfiles, ensuring comprehensive vulnerability detection regardless of your dependency management approach.
-- Experience smoother and faster code scanning with the introduction of incremental scanning.
 - We're committed to strengthening security. This release includes redaction of additional sensitive data in debug logs, minimizing potential risks.
+
+## Complete changelog
 
 ### Features
 
