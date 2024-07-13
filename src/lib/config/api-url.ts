@@ -24,44 +24,43 @@
   In a backwards compatible way.
 */
 
-import * as path from 'path';
 import * as Debug from 'debug';
 import { color } from '../theme';
 
 const debug = Debug('snyk');
+const defaultApiUrl = 'https://api.snyk.io';
 
 /**
  * @description Get a Base URL for Snyk APIs
  * @export
- * @param {string} defaultUrl URL to default to, should be the one defined in the config.default.json file
  * @param {(string | undefined)} envvarDefinedApiUrl if there is an URL defined in the SNYK_API envvar
  * @param {(string | undefined)} configDefinedApiUrl if there is an URL defined in the 'endpoint' key of the config
  * @returns {string} Returns a Base URL - without the /v1. Use this to construct derived URLs
  */
 export function getBaseApiUrl(
-  defaultUrl: string,
   envvarDefinedApiUrl?: string,
   configDefinedApiUrl?: string,
 ): string {
-  const defaultBaseApiUrl = stripV1FromApiUrl(defaultUrl);
   // Use SNYK_API envvar by default
   if (envvarDefinedApiUrl) {
-    return validateUrlOrReturnDefault(
+    return getBaseUrlOrReturnDefault(
       envvarDefinedApiUrl,
+      '',
       "'SNYK_API' environment variable",
-      defaultBaseApiUrl,
+      defaultApiUrl,
     );
   }
 
   if (configDefinedApiUrl) {
-    return validateUrlOrReturnDefault(
+    return getBaseUrlOrReturnDefault(
       configDefinedApiUrl,
+      '',
       "'endpoint' config option. See 'snyk config' command. The value of 'endpoint' is currently set as",
-      defaultBaseApiUrl,
+      defaultApiUrl,
     );
   }
 
-  return defaultBaseApiUrl; // Fallback to default
+  return defaultApiUrl; // Fallback to default
 }
 
 /**
@@ -71,8 +70,9 @@ export function getBaseApiUrl(
  * @param {string} defaultUrl What to return if urlString does not pass
  * @returns {string}
  */
-function validateUrlOrReturnDefault(
+function getBaseUrlOrReturnDefault(
   urlString: string,
+  pathname: string,
   optionName: string,
   defaultUrl: string,
 ): string {
@@ -86,12 +86,28 @@ function validateUrlOrReturnDefault(
     );
     return defaultUrl;
   }
+
+  if (parsedEndpoint.host.startsWith('app.')) {
+    // Rewrite app.snyk.io to api.snyk.io
+    parsedEndpoint.host = parsedEndpoint.host.replace(/^app\./, 'api.');
+  } else if (
+    // Ignore localhosts and URLs with api. already defined
+    !parsedEndpoint.host?.startsWith('localhost') &&
+    !parsedEndpoint.host?.startsWith('api.')
+  ) {
+    // Otherwise add the api. subdomain
+    parsedEndpoint.host = 'api.' + parsedEndpoint.host;
+  }
+
+  parsedEndpoint.pathname = pathname;
+  urlString = parsedEndpoint.toString();
+
   // TODO: this debug is not printed when using the --debug flag, because flags are parsed after config. Making it async works around this
   setTimeout(
     () => debug(`Using a custom Snyk API ${optionName} '${urlString}'`),
     1,
   );
-  return stripV1FromApiUrl(urlString);
+  return urlString;
 }
 
 function parseURLWithoutThrowing(urlString: string): URL | undefined {
@@ -102,24 +118,8 @@ function parseURLWithoutThrowing(urlString: string): URL | undefined {
   }
 }
 
-/**
- * @description Removes /v1 suffix from URL if present
- * @param {string} url
- * @returns {string}
- */
-function stripV1FromApiUrl(url: string): string {
-  const parsedUrl = new URL(url);
-  if (/\/v1\/?$/.test(parsedUrl.pathname)) {
-    parsedUrl.pathname = parsedUrl.pathname.replace(/\/v1\/?$/, '/');
-    return parsedUrl.toString();
-  }
-  return url;
-}
-
 export function getV1ApiUrl(baseApiUrl: string): string {
-  const parsedBaseUrl = new URL(baseApiUrl);
-  parsedBaseUrl.pathname = path.join(parsedBaseUrl.pathname, 'v1');
-  return parsedBaseUrl.toString();
+  return baseApiUrl + '/v1';
 }
 
 /**
@@ -136,35 +136,23 @@ export function getRestApiUrl(
   envvarDefinedRestV3Url?: string,
 ): string {
   // REST API URL should always look like this: https://api.$DOMAIN/rest
-  const parsedBaseUrl = new URL(baseApiUrl);
-  parsedBaseUrl.pathname = '/rest';
-
-  if (parsedBaseUrl.host?.startsWith('app.')) {
-    // Rewrite app.snyk.io/ to api.snyk.io/rest
-    parsedBaseUrl.host = parsedBaseUrl.host.replace(/^app\./, 'api.');
-  } else if (
-    // Ignore localhosts and URLs with api. already defined
-    !parsedBaseUrl.host?.startsWith('localhost') &&
-    !parsedBaseUrl.host?.startsWith('api.')
-  ) {
-    // Otherwise add the api. subdomain
-    parsedBaseUrl.host = 'api.' + parsedBaseUrl.host;
-  }
-
-  const defaultRestApiUrl = parsedBaseUrl.toString();
+  const pathname = '/rest';
+  const defaultRestApiUrl = baseApiUrl + pathname;
 
   // TODO: notify users they can set just the (SNYK_)API envvar
   if (envvarDefinedRestV3Url) {
-    return validateUrlOrReturnDefault(
+    return getBaseUrlOrReturnDefault(
       envvarDefinedRestV3Url,
+      pathname,
       "'SNYK_API_V3_URL' environment variable",
       defaultRestApiUrl,
     );
   }
 
   if (envvarDefinedRestApiUrl) {
-    return validateUrlOrReturnDefault(
+    return getBaseUrlOrReturnDefault(
       envvarDefinedRestApiUrl,
+      pathname,
       "'SNYK_API_REST_URL' environment variable",
       defaultRestApiUrl,
     );
@@ -175,9 +163,7 @@ export function getRestApiUrl(
 
 export function getHiddenApiUrl(restUrl: string): string {
   const parsedBaseUrl = new URL(restUrl);
-
   parsedBaseUrl.pathname = '/hidden';
-
   return parsedBaseUrl.toString();
 }
 
@@ -185,10 +171,6 @@ export function getRootUrl(apiUrlString: string): string {
   // based on https://docs.snyk.io/snyk-processes/data-residency-at-snyk#what-regions-are-available the pattern is as follows
   // https://app.[region.]snyk.io
   // given an api url that starts with api means, that we can replace "api" by "app".
-
-  const apiUrl = new URL(apiUrlString);
-  apiUrl.host = apiUrl.host.replace(/^api\./, '');
-
-  const rootUrl = apiUrl.protocol + '//' + apiUrl.host;
+  const rootUrl = apiUrlString.replace(/api\./, 'app.');
   return rootUrl;
 }

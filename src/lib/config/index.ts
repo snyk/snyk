@@ -41,16 +41,11 @@ interface Config {
 const config = (snykConfig.loadConfig(
   __dirname + '/../..',
 ) as unknown) as Config;
-const defaultApiUrl = 'https://api.snyk.io';
 
 const configDefinedApiUrl = userConfig.get('endpoint');
 const envvarDefinedApiUrl = process.env.SNYK_API;
 
-const snykApiBaseUrl = getBaseApiUrl(
-  defaultApiUrl,
-  envvarDefinedApiUrl,
-  configDefinedApiUrl,
-);
+const snykApiBaseUrl = getBaseApiUrl(envvarDefinedApiUrl, configDefinedApiUrl);
 config.API = getV1ApiUrl(snykApiBaseUrl);
 
 // API_V3_URL is deprecated, but maintaining backwards compatibility

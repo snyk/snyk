@@ -16,8 +16,8 @@ import { execSync } from 'child_process';
 import * as os from 'os';
 
 const fakeServerPort = 12345;
-const SNYK_API_HTTPS = 'https://snyk.io/api/v1';
-const SNYK_API_HTTP = 'http://snyk.io/api/v1';
+const SNYK_API_HTTPS = 'https://api.snyk.io/v1';
+const SNYK_API_HTTP = 'http://api.snyk.io/v1';
 const FAKE_HTTP_PROXY = `http://localhost:${fakeServerPort}`;
 
 function getConnectionRefusedRegExp(): string | RegExp {
