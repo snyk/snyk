@@ -3,8 +3,9 @@ import { pathToFileURL } from 'url';
 import { sleep } from '../../../src/lib/common';
 import * as cp from 'child_process';
 import * as rpc from 'vscode-jsonrpc/node';
+import { createProject } from '../util/createProject';
 
-jest.setTimeout(1000 * 120);
+jest.setTimeout(1000 * 180);
 
 describe('Language Server Extension', () => {
   it('get ls licenses', async () => {
@@ -29,6 +30,17 @@ describe('Language Server Extension', () => {
   });
 
   it('run and wait for diagnostics', async () => {
+    const loop = 10;
+    const folders: any = [];
+
+    for (let i = 0; i < loop; i++) {
+      const project = await createProject('npm/with-vulnerable-lodash-dep');
+      folders.push({
+        name: `workspace ${i}`,
+        uri: pathToFileURL(project.path()).href,
+      });
+    }
+
     let cmd = '';
     if (process.env.TEST_SNYK_COMMAND !== undefined) {
       cmd = process.env.TEST_SNYK_COMMAND;
@@ -55,12 +67,7 @@ describe('Language Server Extension', () => {
         name: 'FakeIDE',
         version: '4.5.6',
       },
-      workspaceFolders: [
-        {
-          name: 'workspace',
-          uri: pathToFileURL('.').href,
-        },
-      ],
+      workspaceFolders: folders,
       rootUri: null,
       initializationOptions: {
         activateSnykCodeSecurity: 'false',
@@ -100,12 +107,14 @@ describe('Language Server Extension', () => {
 
     for (let i = 0; i < 45; i++) {
       console.debug('Waiting for diagnostics...');
-      if (diagnosticCount > 0) {
+      if (diagnosticCount >= loop) {
         break;
       }
       await sleep(1000);
     }
 
     cli.kill(9);
+
+    expect(diagnosticCount).toBeGreaterThan(0);
   });
 });
