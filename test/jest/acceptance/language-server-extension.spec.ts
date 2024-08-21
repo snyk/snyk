@@ -115,6 +115,6 @@ describe('Language Server Extension', () => {
 
     cli.kill(9);
 
-    expect(diagnosticCount).toBeGreaterThan(0);
+    expect(diagnosticCount).toEqual(loop);
   });
 });
