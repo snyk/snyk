@@ -156,6 +156,7 @@
     "danger": "10.9.0",
     "depcheck": "^1.4.3",
     "esbuild": "0.23.1",
+    "esbuild-plugin-license": "^1.2.3",
     "eslint": "6.8.0",
     "eslint-config-prettier": "^6.1.0",
     "eslint-plugin-anti-trojan-source": "^1.1.1",
