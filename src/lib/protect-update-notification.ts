@@ -2,7 +2,7 @@ import { EOL } from 'os';
 import * as theme from './theme';
 import * as fs from 'fs';
 import * as path from 'path';
-import * as createDebug from 'debug';
+import createDebug from 'debug';
 
 const debug = createDebug('snyk-protect-update-notification');
 

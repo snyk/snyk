@@ -1,5 +1,5 @@
 import config from '../../../../../config';
-import * as createDebugLogger from 'debug';
+import createDebugLogger from 'debug';
 
 const debugLog = createDebugLogger('snyk-iac');
 

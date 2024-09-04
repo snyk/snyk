@@ -2,8 +2,8 @@ import { pathToFileURL } from 'url';
 import { marked } from 'marked';
 import * as sarif from 'sarif';
 import * as path from 'path';
-import * as upperFirst from 'lodash.upperfirst';
-import * as camelCase from 'lodash.camelcase';
+import upperFirst from 'lodash.upperfirst';
+import camelCase from 'lodash.camelcase';
 
 import { getVersion } from '../../../version';
 import { Results, TestOutput, Vulnerability } from './scan/results';

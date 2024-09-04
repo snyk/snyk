@@ -11,7 +11,7 @@ import {
 } from '.';
 import chalk from 'chalk';
 import { AuthFailedError, InternalServerError } from '../errors';
-import * as Debug from 'debug';
+import Debug from 'debug';
 import config from '../config';
 
 const debug = Debug(SNYK_APP_DEBUG);

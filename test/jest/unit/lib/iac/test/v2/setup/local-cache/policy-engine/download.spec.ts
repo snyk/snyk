@@ -1,6 +1,6 @@
 import * as crypto from 'crypto';
 import * as pathLib from 'path';
-import * as cloneDeep from 'lodash.clonedeep';
+import cloneDeep from 'lodash.clonedeep';
 
 import * as localCacheUtils from '../../../../../../../../../../src/lib/iac/test/v2/local-cache/utils';
 import * as fileUtils from '../../../../../../../../../../src/lib/iac/file-utils';

@@ -4,7 +4,7 @@ import { IaCErrorCodes, OCIRegistryURLComponents } from '../types';
 import { CustomError } from '../../../../../../lib/errors';
 import { getErrorStringCode } from '../error-utils';
 import { LOCAL_POLICY_ENGINE_DIR } from '../local-cache';
-import * as Debug from 'debug';
+import Debug from 'debug';
 import { createIacDir } from '../file-utils';
 import { OciRegistry } from './oci-registry';
 const debug = Debug('iac-oci-pull');

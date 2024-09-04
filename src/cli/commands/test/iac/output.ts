@@ -18,7 +18,7 @@ import {
 import { extractDataToSendFromResults } from '../../../../lib/formatters/test/format-test-results';
 
 import { isIacShareResultsOptions } from './local-execution/assert-iac-options-flag';
-import * as ora from 'ora';
+import ora from 'ora';
 import { CustomError, FormattedCustomError } from '../../../../lib/errors';
 import {
   IacFileInDirectory,

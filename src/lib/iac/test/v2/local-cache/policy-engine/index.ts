@@ -1,4 +1,4 @@
-import * as createDebugLogger from 'debug';
+import createDebugLogger from 'debug';
 
 import { TestConfig } from '../../types';
 import { lookupLocalPolicyEngine } from './lookup-local';

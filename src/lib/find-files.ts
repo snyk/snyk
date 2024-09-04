@@ -1,11 +1,11 @@
 import * as fs from 'fs';
 import * as pathLib from 'path';
 
-import * as sortBy from 'lodash.sortby';
-import * as groupBy from 'lodash.groupby';
-import * as assign from 'lodash.assign';
+import sortBy from 'lodash.sortby';
+import groupBy from 'lodash.groupby';
+import assign from 'lodash.assign';
 import { detectPackageManagerFromFile } from './detect';
-import * as debugModule from 'debug';
+import debugModule from 'debug';
 import {
   PNPM_FEATURE_FLAG,
   SUPPORTED_MANIFEST_FILES,

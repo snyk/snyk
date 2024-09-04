@@ -1,9 +1,9 @@
-import * as cloneDeep from 'lodash.clonedeep';
+import cloneDeep from 'lodash.clonedeep';
 import * as pathLib from 'path';
 import * as cliInterface from '@snyk/cli-interface';
 import chalk from 'chalk';
 import { icon } from '../theme';
-import * as debugModule from 'debug';
+import debugModule from 'debug';
 
 import { TestOptions, Options, MonitorOptions } from '../types';
 import { detectPackageManagerFromFile } from '../detect';

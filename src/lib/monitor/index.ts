@@ -1,4 +1,4 @@
-import * as Debug from 'debug';
+import Debug from 'debug';
 import * as path from 'path';
 import * as depGraphLib from '@snyk/dep-graph';
 import * as snyk from '..';

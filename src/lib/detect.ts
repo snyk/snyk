@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as pathLib from 'path';
-import * as debugLib from 'debug';
+import debugLib from 'debug';
 import { NoSupportedManifestsFoundError } from './errors';
 import {
   SupportedPackageManagers,

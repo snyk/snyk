@@ -1,5 +1,5 @@
 import * as pathLib from 'path';
-import * as cloneDeep from 'lodash.clonedeep';
+import cloneDeep from 'lodash.clonedeep';
 
 import * as lookupLocalLib from '../../../../../../../../../../src/lib/iac/test/v2/local-cache/policy-engine/lookup-local';
 import * as downloadLib from '../../../../../../../../../../src/lib/iac/test/v2/local-cache/policy-engine/download';

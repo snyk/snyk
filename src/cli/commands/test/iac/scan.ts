@@ -1,5 +1,5 @@
-import * as cloneDeep from 'lodash.clonedeep';
-import * as assign from 'lodash.assign';
+import cloneDeep from 'lodash.clonedeep';
+import assign from 'lodash.assign';
 
 import {
   IacFileInDirectory,
@@ -19,7 +19,7 @@ import {
 } from './local-execution/assert-iac-options-flag';
 import { initRules } from './local-execution/rules/rules';
 import { cleanLocalCache } from './local-execution/measurable-methods';
-import * as ora from 'ora';
+import ora from 'ora';
 import { IaCErrorCodes, IacOrgSettings } from './local-execution/types';
 import * as pathLib from 'path';
 import { CustomError } from '../../../../lib/errors';

@@ -14,7 +14,7 @@ import {
   createIgnorePattern,
   verifyServiceMappingExists,
 } from '../service-mappings';
-import * as debugLib from 'debug';
+import debugLib from 'debug';
 import { makeRequest } from '../../request';
 import * as child_process from 'child_process';
 import { StdioOptions } from 'child_process';

@@ -5,7 +5,7 @@ import * as os from 'os';
 import * as path from 'path';
 import { getFixturePath } from '../../util/getFixturePath';
 import * as uuid from 'uuid';
-import * as rimraf from 'rimraf';
+import rimraf from 'rimraf';
 import { processHTMLOutput } from '../../../../src/lib/iac/drift';
 import { DescribeOptions } from '../../../../src/lib/iac/types';
 import { driftctlVersion } from '../../../../src/lib/iac/drift/driftctl';

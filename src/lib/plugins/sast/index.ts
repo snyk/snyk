@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import * as Sarif from 'sarif';
-import * as debugLib from 'debug';
+import debugLib from 'debug';
 import { v4 as uuidv4 } from 'uuid';
 import { getCodeTestResults } from './analysis';
 import { getSastSettings } from './settings';
@@ -15,7 +15,7 @@ import { CodeClientErrorWithDetail, CodeClientError } from './errors';
 import { filterIgnoredIssues } from './utils';
 import { jsonStringifyLargeObject } from '../../json';
 import * as analytics from '../../analytics';
-import * as cloneDeep from 'lodash.clonedeep';
+import cloneDeep from 'lodash.clonedeep';
 
 const debug = debugLib('snyk-code');
 

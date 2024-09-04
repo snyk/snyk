@@ -1,4 +1,4 @@
-import * as baseDebug from 'debug';
+import baseDebug from 'debug';
 const debug = baseDebug('snyk-test');
 import * as path from 'path';
 import { spinner } from '../../spinner';

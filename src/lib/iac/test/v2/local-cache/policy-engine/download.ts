@@ -1,6 +1,6 @@
 import * as pathLib from 'path';
 import * as crypto from 'crypto';
-import * as createDebugLogger from 'debug';
+import createDebugLogger from 'debug';
 
 import { getErrorStringCode } from '../../../../../../cli/commands/test/iac/local-execution/error-utils';
 import { IaCErrorCodes } from '../../../../../../cli/commands/test/iac/local-execution/types';

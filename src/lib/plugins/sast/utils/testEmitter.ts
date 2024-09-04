@@ -1,6 +1,6 @@
 import { emitter as codeEmitter } from '@snyk/code-client';
 import { spinner } from '../../../spinner';
-import * as debugLib from 'debug';
+import debugLib from 'debug';
 
 export function analysisProgressUpdate(): void {
   let currentMessage = '';

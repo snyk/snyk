@@ -1,4 +1,4 @@
-import * as baseDebug from 'debug';
+import baseDebug from 'debug';
 import * as pathUtil from 'path';
 const sortBy = require('lodash.sortby');
 const groupBy = require('lodash.groupby');

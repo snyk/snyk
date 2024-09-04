@@ -1,4 +1,4 @@
-import * as camelCase from 'lodash.camelcase';
+import camelCase from 'lodash.camelcase';
 import { DepGraphData } from '@snyk/dep-graph';
 import { GraphNode } from '@snyk/dep-graph/dist/core/types';
 import config from '../../config';

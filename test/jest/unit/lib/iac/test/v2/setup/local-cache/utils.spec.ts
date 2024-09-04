@@ -1,5 +1,5 @@
 import * as pathLib from 'path';
-import * as cloneDeep from 'lodash.clonedeep';
+import cloneDeep from 'lodash.clonedeep';
 
 import * as requestLib from '../../../../../../../../../src/lib/request/request';
 import {

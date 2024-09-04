@@ -1,7 +1,7 @@
 import * as url from 'url';
 import subProcess = require('../../sub-process');
 import { GitTarget } from '../types';
-import * as debugModule from 'debug';
+import debugModule from 'debug';
 
 const debug = debugModule('snyk:git');
 

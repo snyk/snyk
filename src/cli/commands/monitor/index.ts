@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import * as fs from 'fs';
-import * as Debug from 'debug';
+import Debug from 'debug';
 import * as pathUtil from 'path';
 import { legacyPlugin as pluginApi } from '@snyk/cli-interface';
 import { checkOSSPaths } from '../../../lib/check-paths';

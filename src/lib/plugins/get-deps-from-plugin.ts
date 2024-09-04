@@ -1,4 +1,4 @@
-import * as debugModule from 'debug';
+import debugModule from 'debug';
 import * as pathLib from 'path';
 import chalk from 'chalk';
 import { icon } from '../theme';

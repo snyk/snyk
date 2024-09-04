@@ -25,7 +25,7 @@
 */
 
 import * as path from 'path';
-import * as Debug from 'debug';
+import Debug from 'debug';
 import { color } from '../theme';
 
 const debug = Debug('snyk');

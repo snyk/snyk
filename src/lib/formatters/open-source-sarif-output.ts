@@ -1,7 +1,7 @@
 import * as sarif from 'sarif';
-import * as upperFirst from 'lodash.upperfirst';
-import * as groupBy from 'lodash.groupby';
-import * as map from 'lodash.map';
+import upperFirst from 'lodash.upperfirst';
+import groupBy from 'lodash.groupby';
+import map from 'lodash.map';
 
 import { TestResult, AnnotatedIssue } from '../snyk-test/legacy';
 import { getResults } from './get-sarif-result';

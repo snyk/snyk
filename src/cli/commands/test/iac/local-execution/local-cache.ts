@@ -1,9 +1,9 @@
 import * as path from 'path';
 import * as fs from 'fs';
 import { EngineType, IaCErrorCodes } from './types';
-import * as rimraf from 'rimraf';
+import rimraf from 'rimraf';
 import { createIacDir, extractBundle, isValidBundle } from './file-utils';
-import * as Debug from 'debug';
+import Debug from 'debug';
 import { CustomError } from '../../../../../lib/errors';
 import * as analytics from '../../../../../lib/analytics';
 import { getErrorStringCode } from './error-utils';

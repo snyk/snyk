@@ -1,4 +1,4 @@
-import * as debugLib from 'debug';
+import debugLib from 'debug';
 import chalk from 'chalk';
 import { makeRequest } from '../../request';
 import { SastSettings } from './types';

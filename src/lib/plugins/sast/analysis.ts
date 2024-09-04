@@ -23,7 +23,7 @@ import { FeatureNotSupportedBySnykCodeError } from './errors';
 import { getProxyForUrl } from 'proxy-from-env';
 import { bootstrap } from 'global-agent';
 import chalk from 'chalk';
-import * as debugLib from 'debug';
+import debugLib from 'debug';
 import { getCodeClientProxyUrl } from '../../code-config';
 import {
   isLocalCodeEngine,

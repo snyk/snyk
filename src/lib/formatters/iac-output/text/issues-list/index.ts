@@ -1,7 +1,7 @@
 import { EOL } from 'os';
-import * as capitalize from 'lodash.capitalize';
-import * as isEmpty from 'lodash.isempty';
-import * as debug from 'debug';
+import capitalize from 'lodash.capitalize';
+import isEmpty from 'lodash.isempty';
+import Debug from 'debug';
 
 import { colors, contentPadding } from '../utils';
 import { formatIssue } from './issue';

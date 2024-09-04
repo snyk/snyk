@@ -1,5 +1,5 @@
 import * as pathLib from 'path';
-import * as debugLib from 'debug';
+import debugLib from 'debug';
 
 import * as poetryFix from '@snyk/fix-poetry';
 

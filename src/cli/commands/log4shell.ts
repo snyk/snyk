@@ -1,8 +1,8 @@
 import { MethodArgs } from '../args';
 import { promises, Stats } from 'fs';
 import * as crypto from 'crypto';
-import * as AdmZip from 'adm-zip';
-import * as ora from 'ora';
+import AdmZip from 'adm-zip';
+import ora from 'ora';
 import * as semver from 'semver';
 import { FileSignatureDetails, vulnerableSignatures } from './log4shell-hashes';
 

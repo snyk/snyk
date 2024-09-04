@@ -1,5 +1,5 @@
 import * as theme from './theme';
-import * as createDebug from 'debug';
+import createDebug from 'debug';
 import { EOL } from 'os';
 import config from './config';
 import { getVulnerabilityUrl } from './formatters/get-vuln-url';

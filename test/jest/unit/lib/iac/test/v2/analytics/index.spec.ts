@@ -1,4 +1,4 @@
-import * as clonedeep from 'lodash.clonedeep';
+import cloneDeep from 'lodash.clonedeep';
 import * as path from 'path';
 import * as analytics from '../../../../../../../../src/lib/analytics';
 import * as fs from 'fs';

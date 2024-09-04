@@ -5,7 +5,7 @@ import {
 } from '../../../../src/cli/commands/test/iac/local-execution/local-cache';
 import * as fileUtilsModule from '../../../../src/cli/commands/test/iac/local-execution/file-utils';
 import { PassThrough } from 'stream';
-import * as rimraf from 'rimraf';
+import rimraf from 'rimraf';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as request from '../../../../src/lib/request/request';

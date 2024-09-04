@@ -1,6 +1,6 @@
 import { MethodArgs } from '../args';
 import { processCommandArgs } from './process-command-args';
-import * as legacyError from '../../lib/errors/legacy-errors';
+import legacyError from '../../lib/errors/legacy-errors';
 import {
   driftignoreFromPolicy,
   parseDriftAnalysisResults,

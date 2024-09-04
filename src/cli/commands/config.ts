@@ -20,10 +20,11 @@ export default async function config(
       snyk.config.set(key, val);
       res += key + ' updated\n';
 
+      // LADEBUG
       // ensure we update the live library
-      if (key === 'api') {
-        (snyk as any).api = val;
-      }
+      // if (key === 'api') {
+      //   (snyk as any).api = val;
+      // }
     });
 
     return res;
@@ -43,19 +44,21 @@ export default async function config(
     }
     snyk.config.delete(key);
 
-    if (key === 'api') {
-      // ensure we update the live library
-      (snyk as any).api = null;
-    }
+    // LADEBUG
+    // if (key === 'api') {
+    //   // ensure we update the live library
+    //   (snyk as any).api = null;
+    // }
 
     return `${key} deleted`;
   }
 
   if (method === 'clear') {
     snyk.config.clear();
+    // LADEBUG
     // ensure we update the live library
-    (snyk as any).api = null;
-    return 'config cleared';
+    // (snyk as any).api = null;
+    // return 'config cleared';
   }
 
   return Object.keys(snyk.config.all)

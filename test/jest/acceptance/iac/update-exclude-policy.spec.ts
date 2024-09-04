@@ -1,7 +1,7 @@
 import { run as Run, startMockServer } from './helpers';
 import * as os from 'os';
 import * as fs from 'fs';
-import * as rimraf from 'rimraf';
+import rimraf from 'rimraf';
 import * as path from 'path';
 import { findAndLoadPolicy } from '../../../../src/lib/policy';
 

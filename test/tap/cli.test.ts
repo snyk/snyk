@@ -1,5 +1,5 @@
 import * as util from 'util';
-import * as get from 'lodash.get';
+import get from 'lodash.get';
 import * as isObject from 'lodash.isobject';
 import { test } from 'tap';
 import * as ciChecker from '../../src/lib/is-ci';

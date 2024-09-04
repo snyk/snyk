@@ -1,4 +1,4 @@
-import * as clonedeep from 'lodash.clonedeep';
+import cloneDeep from 'lodash.clonedeep';
 import * as fs from 'fs';
 import * as pathLib from 'path';
 

@@ -9,7 +9,7 @@
 */
 
 import { exec } from 'child_process';
-import * as createDebug from 'debug';
+import createDebug from 'debug';
 import * as fs from 'fs';
 import { join } from 'path';
 import { ArgsOptions } from '../../cli/args';

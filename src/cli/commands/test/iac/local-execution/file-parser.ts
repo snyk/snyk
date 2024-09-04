@@ -23,7 +23,7 @@ import { parseYAMLOrJSONFileData } from './yaml-parser';
 import hclToJsonV2 from './parsers/hcl-to-json-v2';
 import { IacProjectType } from '../../../../../lib/iac/constants';
 
-import * as Debug from 'debug';
+import Debug from 'debug';
 
 const debug = Debug('snyk-test');
 

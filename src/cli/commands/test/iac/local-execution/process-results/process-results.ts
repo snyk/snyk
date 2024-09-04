@@ -1,7 +1,7 @@
 import { filterIgnoredIssues } from './policy';
 import { formatAndShareResults } from './share-results';
 import { formatScanResults } from '../measurable-methods';
-import * as cloneDeep from 'lodash.clonedeep';
+import cloneDeep from 'lodash.clonedeep';
 import { Policy } from 'snyk-policy';
 import {
   IacOutputMeta,

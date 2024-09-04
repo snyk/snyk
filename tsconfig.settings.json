@@ -21,6 +21,7 @@
     "strict": true,
     "noImplicitAny": false, // Needed to compile tap and ansi-escapes
     "composite": true,
-    "useUnknownInCatchVariables": false
+    "useUnknownInCatchVariables": false,
+    "esModuleInterop": true
   }
 }

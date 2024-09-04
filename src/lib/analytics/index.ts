@@ -1,4 +1,4 @@
-import * as createDebug from 'debug';
+import createDebug from 'debug';
 import * as needle from 'needle';
 import stripAnsi = require('strip-ansi');
 import { getAuthHeader, someTokenExists } from '../api-token';

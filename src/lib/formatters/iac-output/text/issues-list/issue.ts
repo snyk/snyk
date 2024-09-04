@@ -1,7 +1,7 @@
-import * as capitalize from 'lodash.capitalize';
+import capitalize from 'lodash.capitalize';
 import chalk from 'chalk';
 import { EOL } from 'os';
-import * as wrapAnsi from 'wrap-ansi';
+import wrapAnsi from 'wrap-ansi';
 import { iacRemediationTypes } from '../../../../iac/constants';
 import { printPath } from '../../../remediation-based-format-issues';
 import { colors, contentPadding, maxLineWidth } from '../utils';

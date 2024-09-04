@@ -1,4 +1,4 @@
-import * as Debug from 'debug';
+import Debug from 'debug';
 import * as pathLib from 'path';
 import { JsonStreamStringify } from 'json-stream-stringify';
 

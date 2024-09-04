@@ -1,4 +1,4 @@
-import * as Debug from 'debug';
+import Debug from 'debug';
 import { EOL } from 'os';
 const cloneDeep = require('lodash.clonedeep');
 const omit = require('lodash.omit');

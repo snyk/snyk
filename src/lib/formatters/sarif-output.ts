@@ -1,5 +1,5 @@
 import * as sarif from 'sarif';
-import * as upperFirst from 'lodash.upperfirst';
+import upperFirst from 'lodash.upperfirst';
 import { AnnotatedIssue, TestResult } from '../snyk-test/legacy';
 import { SEVERITY } from '../snyk-test/legacy';
 import { getResults } from './get-sarif-result';

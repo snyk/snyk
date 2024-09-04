@@ -1,4 +1,4 @@
-import * as Debug from 'debug';
+import Debug from 'debug';
 import { MethodArgs } from '../../args';
 import { processCommandArgs } from '../process-command-args';
 import {

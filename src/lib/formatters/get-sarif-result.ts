@@ -1,6 +1,6 @@
 import * as sarif from 'sarif';
-import * as groupBy from 'lodash.groupby';
-import * as map from 'lodash.map';
+import groupBy from 'lodash.groupby';
+import map from 'lodash.map';
 
 import { SEVERITY, TestResult, AnnotatedIssue } from '../snyk-test/legacy';
 

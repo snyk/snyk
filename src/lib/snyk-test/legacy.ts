@@ -1,4 +1,4 @@
-import * as values from 'lodash.values';
+import values from 'lodash.values';
 import * as depGraphLib from '@snyk/dep-graph';
 import {
   DepsFilePaths,

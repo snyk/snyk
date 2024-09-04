@@ -1,7 +1,7 @@
 import * as pathLib from 'path';
 import { pathToFileURL } from 'url';
-import * as upperFirst from 'lodash.upperfirst';
-import * as camelCase from 'lodash.camelcase';
+import upperFirst from 'lodash.upperfirst';
+import camelCase from 'lodash.camelcase';
 
 import {
   IacTestResponse,

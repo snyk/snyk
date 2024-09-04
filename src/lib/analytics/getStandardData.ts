@@ -11,7 +11,7 @@ import {
 } from './sources';
 import { StandardAnalyticsData } from './types';
 import { MetricsCollector } from '../metrics';
-import * as createDebug from 'debug';
+import createDebug from 'debug';
 import { ArgsOptions } from '../../cli/args';
 
 const debug = createDebug('snyk');

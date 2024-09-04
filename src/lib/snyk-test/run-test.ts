@@ -1,14 +1,14 @@
 import * as fs from 'fs';
-import * as get from 'lodash.get';
+import get from 'lodash.get';
 import * as path from 'path';
 import * as pathUtil from 'path';
-import * as debugModule from 'debug';
+import debugModule from 'debug';
 import chalk from 'chalk';
 import { icon } from '../theme';
 import { parsePackageString as moduleToObject } from 'snyk-module';
 import * as depGraphLib from '@snyk/dep-graph';
 import * as theme from '../../lib/theme';
-import * as pMap from 'p-map';
+import pMap from 'p-map';
 
 import {
   AffectedPackages,

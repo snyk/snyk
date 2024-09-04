@@ -32,7 +32,7 @@ import {
   colors,
   contentPadding,
 } from '../../../formatters/iac-output/text/utils';
-import * as wrapAnsi from 'wrap-ansi';
+import wrapAnsi from 'wrap-ansi';
 import { formatIacTestWarnings } from '../../../formatters/iac-output/text/failures/list';
 import { IacV2Name, IacV2ShortLink } from '../../constants';
 

@@ -16,7 +16,7 @@ import {
 } from '../../../../../../lib/types';
 import * as analytics from '../../../../../../lib/analytics';
 import { getContributors } from '../../../../../../lib/monitor/dev-count-analysis';
-import * as Debug from 'debug';
+import Debug from 'debug';
 import { AuthFailedError, ValidationError } from '../../../../../../lib/errors';
 import { TestLimitReachedError } from '../usage-tracking';
 
