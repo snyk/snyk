@@ -2,8 +2,7 @@
   "extends": "./tsconfig.settings.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "rootDir": "./src",
-    "esModuleInterop": false
+    "rootDir": "./src"
   },
   "include": ["./src/**/*"],
   "references": [

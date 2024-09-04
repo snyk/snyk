@@ -1,7 +1,7 @@
 import { EOL } from 'os';
 import capitalize from 'lodash.capitalize';
 import isEmpty from 'lodash.isempty';
-import Debug from 'debug';
+import createDebug from 'debug';
 
 import { colors, contentPadding } from '../utils';
 import { formatIssue } from './issue';
@@ -49,7 +49,7 @@ export function getIacDisplayedIssues(
         .map((result) => formatIssue(result, options))
         .join(EOL.repeat(2));
 
-      debug(
+      createDebug(
         `iac display output - ${severity} severity ${severityResults.length} issues`,
       );
 
