@@ -31,6 +31,7 @@
     "format": "prettier --write '**/*.{js,ts,json,yaml,yml,md}' && npm run lint:js -- --fix",
     "format:changes": "./scripts/format/prettier-changes.sh",
     "lint": "npm-run-all --serial --continue-on-error lint:*",
+    "lint:js-biome": "biome lint .",
     "lint:js": "eslint --quiet --color --cache '**/*.{js,ts}'",
     "lint:formatting": "prettier --check '**/*.{js,ts,json,yaml,yml,md}'",
     "build": "patch-package && npm run build:dev",
@@ -60,6 +61,7 @@
   "author": "snyk.io",
   "license": "Apache-2.0",
   "dependencies": {
+    "@eslint/js": "^9.9.1",
     "@open-policy-agent/opa-wasm": "^1.6.0",
     "@sentry/node": "^7.34.0",
     "@snyk/cli-interface": "2.12.0",
@@ -136,6 +138,7 @@
     "wrap-ansi": "^5.1.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.8.3",
     "@types/body-parser": "^1.19.1",
     "@types/cross-spawn": "^6.0.2",
     "@types/express": "^4.17.13",
