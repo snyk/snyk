@@ -194,7 +194,7 @@ export default async function monitor(...args0: MethodArgs): Promise<any> {
       const unsupportedPackageManagers: Array<{
         label: string;
         name: string;
-      }> = [];
+      }> = [{ label: 'Bazel', name: 'bazel' }];
       const unsupportedPackageManager = unsupportedPackageManagers.find(
         (pm) => pm.name === packageManager,
       );

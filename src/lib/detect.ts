@@ -37,6 +37,7 @@ const DETECTABLE_FILES: string[] = [
   'mix.exs',
   'mix.lock',
   'Package.swift',
+  'maven_install.json',
 ];
 
 export const AUTO_DETECTABLE_FILES: string[] = [
@@ -66,6 +67,7 @@ export const AUTO_DETECTABLE_FILES: string[] = [
   'mix.exs',
   'mix.lock',
   'Package.swift',
+  'maven_install.json',
 ];
 
 // when file is specified with --file, we look it up here
@@ -104,6 +106,7 @@ const DETECTABLE_PACKAGE_MANAGERS: {
   [SUPPORTED_MANIFEST_FILES.POETRY_LOCK]: 'poetry',
   [SUPPORTED_MANIFEST_FILES.MIX_EXS]: 'hex',
   [SUPPORTED_MANIFEST_FILES.PACKAGE_SWIFT]: 'swift',
+  [SUPPORTED_MANIFEST_FILES.MAVEN_INSTALL_JSON]: 'bazel',
 };
 
 export function isPathToPackageFile(

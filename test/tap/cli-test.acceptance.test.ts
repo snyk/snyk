@@ -46,6 +46,7 @@ const languageTests: AcceptanceTests[] = [
   YarnWorkspacesTests,
   ElixirTests,
   SwiftTests,
+  BazelTests,
 ];
 
 const { test, only } = tap;
@@ -68,6 +69,7 @@ const after = tap.runOnly ? only : test;
 import * as plugins from '../../src/lib/plugins/index';
 import * as ecoSystemPlugins from '../../src/lib/ecosystems/plugins';
 import { snykHttpClient } from '../../src/lib/request/snyk-http-client';
+import {BazelTests} from "./cli-test/cli-test.bazel-maven.spec";
 
 /*
   TODO: enable these tests, once we switch from node-tap

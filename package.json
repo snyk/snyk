@@ -114,6 +114,7 @@
     "proxy-from-env": "^1.0.0",
     "rimraf": "^2.6.3",
     "semver": "^6.0.0",
+    "@snyk/snyk-bazel-plugin-v2": "file:/path/to/plugin",
     "snyk-config": "^5.0.0",
     "snyk-cpp-plugin": "2.24.0",
     "snyk-docker-plugin": "6.13.2",

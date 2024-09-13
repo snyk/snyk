@@ -19,7 +19,8 @@ export type SupportedPackageManagers =
   | 'poetry'
   | 'hex'
   | 'Unmanaged (C/C++)'
-  | 'swift';
+  | 'swift'
+  | 'bazel';
 
 export enum SUPPORTED_MANIFEST_FILES {
   GEMFILE = 'Gemfile',
@@ -53,6 +54,7 @@ export enum SUPPORTED_MANIFEST_FILES {
   POETRY_LOCK = 'poetry.lock',
   MIX_EXS = 'mix.exs',
   PACKAGE_SWIFT = 'Package.swift',
+  MAVEN_INSTALL_JSON = 'maven_install.json',
 }
 
 export const SUPPORTED_PACKAGE_MANAGER_NAME: {
@@ -77,6 +79,7 @@ export const SUPPORTED_PACKAGE_MANAGER_NAME: {
   hex: 'Hex',
   'Unmanaged (C/C++)': 'Unmanaged (C/C++)',
   swift: 'Swift',
+  bazel: 'bazel',
 };
 
 export const GRAPH_SUPPORTED_PACKAGE_MANAGERS: SupportedPackageManagers[] = [
