@@ -17,6 +17,7 @@ export BINARY_OUTPUT_FOLDER = binary-releases
 SHASUM_CMD = shasum
 GOHOSTOS = $(shell go env GOHOSTOS)
 export PYTHON = python
+SIGN_ARTIFACT := false
 
 PYTHON_VERSION = $(shell python3 --version)
 ifneq (, $(PYTHON_VERSION))
@@ -137,17 +138,17 @@ $(BINARY_RELEASES_FOLDER_TS_CLI)/snyk-linux-arm64: prepack | $(BINARY_RELEASES_F
 
 $(BINARY_RELEASES_FOLDER_TS_CLI)/snyk-macos: prepack | $(BINARY_RELEASES_FOLDER_TS_CLI)
 	$(PKG) -t node$(PKG_NODE_VERSION)-macos-x64 -o $(BINARY_RELEASES_FOLDER_TS_CLI)/snyk-macos
-	$(SHELL) $(WORKING_DIR)/cliv2/scripts/sign_darwin.sh $(BINARY_RELEASES_FOLDER_TS_CLI) snyk-macos --sign-nodejs-cli
+	if [ "$(SIGN_ARTIFACT)" == "true" ]; then $(SHELL) $(WORKING_DIR)/cliv2/scripts/sign_darwin.sh $(BINARY_RELEASES_FOLDER_TS_CLI) snyk-macos --sign-nodejs-cli; fi
 	$(MAKE) $(BINARY_RELEASES_FOLDER_TS_CLI)/snyk-macos.sha256
 
 $(BINARY_RELEASES_FOLDER_TS_CLI)/snyk-macos-arm64: prepack | $(BINARY_RELEASES_FOLDER_TS_CLI)
 	$(PKG) -t node$(PKG_NODE_VERSION)-macos-arm64 -o $(BINARY_RELEASES_FOLDER_TS_CLI)/snyk-macos-arm64 --no-bytecode
-	$(SHELL) $(WORKING_DIR)/cliv2/scripts/sign_darwin.sh $(BINARY_RELEASES_FOLDER_TS_CLI) snyk-macos-arm64 --sign-nodejs-cli
+	if [ "$(SIGN_ARTIFACT)" == "true" ]; then $(SHELL) $(WORKING_DIR)/cliv2/scripts/sign_darwin.sh $(BINARY_RELEASES_FOLDER_TS_CLI) snyk-macos-arm64 --sign-nodejs-cli; fi
 	$(MAKE) $(BINARY_RELEASES_FOLDER_TS_CLI)/snyk-macos-arm64.sha256
 
 $(BINARY_RELEASES_FOLDER_TS_CLI)/snyk-win.exe: prepack | $(BINARY_RELEASES_FOLDER_TS_CLI)
 	$(PKG) -t node$(PKG_NODE_VERSION)-win-x64 -o $(BINARY_RELEASES_FOLDER_TS_CLI)/snyk-win.exe
-	powershell $(WORKING_DIR)/cliv2/scripts/sign_windows.ps1 $(BINARY_RELEASES_FOLDER_TS_CLI) snyk-win.exe
+	if [ "$(SIGN_ARTIFACT)" == "true" ]; then powershell $(WORKING_DIR)/cliv2/scripts/sign_windows.ps1 $(BINARY_RELEASES_FOLDER_TS_CLI) snyk-win.exe; fi
 	$(MAKE) $(BINARY_RELEASES_FOLDER_TS_CLI)/snyk-win.exe.sha256
 
 $(BINARY_RELEASES_FOLDER_TS_CLI)/snyk-for-docker-desktop-darwin-x64.tar.gz: prepack | $(BINARY_RELEASES_FOLDER_TS_CLI)
