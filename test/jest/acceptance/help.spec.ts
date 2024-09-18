@@ -2,7 +2,9 @@ import { runSnykCLI } from '../util/runSnykCLI';
 
 describe('help', () => {
   it('prints help info', async () => {
-    const { stdout, code, stderr } = await runSnykCLI('help');
+    const { stdout, code, stderr } = await runSnykCLI('help', {
+      logErrors: true,
+    });
 
     expect(stdout).toContain(
       'Snyk CLI scans and monitors your projects for security vulnerabilities',
