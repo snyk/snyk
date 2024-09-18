@@ -1,5 +1,5 @@
 import { InspectResult } from '@snyk/cli-interface/legacy/plugin';
-import chalk from 'chalk';
+import chalk = require('chalk');
 import config from '../config';
 import { isCI } from '../is-ci';
 import { makeRequest } from '../request/promise';

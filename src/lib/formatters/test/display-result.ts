@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+import chalk = require('chalk');
 import { icon, color } from '../../theme';
 import { isCI } from '../../../lib/is-ci';
 import {

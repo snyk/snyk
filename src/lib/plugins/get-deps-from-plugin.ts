@@ -1,6 +1,6 @@
 import * as debugModule from 'debug';
 import * as pathLib from 'path';
-import chalk from 'chalk';
+import chalk = require('chalk');
 import { icon } from '../theme';
 import { legacyPlugin as pluginApi } from '@snyk/cli-interface';
 import { find } from '../find-files';

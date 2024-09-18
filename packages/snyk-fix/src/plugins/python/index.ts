@@ -1,7 +1,7 @@
 import * as debugLib from 'debug';
 import * as pMap from 'p-map';
 import * as ora from 'ora';
-import * as chalk from 'chalk';
+import chalk = require('chalk');
 
 import { EntityToFix, FixOptions } from '../../types';
 import { FailedToFix, FixHandlerResultByPlugin } from '../types';

@@ -16,7 +16,7 @@ import { setDefaultTestOptions } from '../test/set-default-test-options';
 import { validateFixCommandIsSupported } from './validate-fix-command-is-supported';
 import { Options, TestOptions } from '../../../lib/types';
 import { getDisplayPath } from './get-display-path';
-import chalk from 'chalk';
+import chalk = require('chalk');
 import { icon, color } from '../../../lib/theme';
 import { checkOSSPaths } from '../../../lib/check-paths';
 

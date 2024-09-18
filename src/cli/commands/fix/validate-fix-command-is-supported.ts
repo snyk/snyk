@@ -6,7 +6,7 @@ import { isFeatureFlagSupportedForOrg } from '../../../lib/feature-flags';
 import { FeatureNotSupportedByEcosystemError } from '../../../lib/errors/not-supported-by-ecosystem';
 import { Options, TestOptions } from '../../../lib/types';
 import { AuthFailedError } from '../../../lib/errors';
-import chalk from 'chalk';
+import chalk = require('chalk');
 
 const debug = Debug('snyk-fix');
 const snykFixFeatureFlag = 'cliSnykFix';

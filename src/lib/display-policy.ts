@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+import chalk = require('chalk');
 import { demunge, Policy, VulnRules } from 'snyk-policy';
 import config from './config';
 

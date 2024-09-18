@@ -1,5 +1,5 @@
 const values = require('lodash.values');
-import chalk from 'chalk';
+import chalk = require('chalk');
 
 export function createDockerBinaryHeading(pkgInfo): string {
   const binaryName = pkgInfo.pkg.name;

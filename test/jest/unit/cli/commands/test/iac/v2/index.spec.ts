@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import chalk from 'chalk';
+import chalk = require('chalk');
 
 import * as scanLib from '../../../../../../../../src/lib/iac/test/v2/scan';
 import * as downloadPolicyEngineLib from '../../../../../../../../src/lib/iac/test/v2/local-cache/policy-engine/download';

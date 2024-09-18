@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+import chalk = require('chalk');
 
 export const SNYK_APP_NAME = 'snykAppName';
 export const SNYK_APP_REDIRECT_URIS = 'snykAppRedirectUris';

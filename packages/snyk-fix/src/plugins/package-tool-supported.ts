@@ -1,4 +1,4 @@
-import * as chalk from 'chalk';
+import chalk = require('chalk');
 
 import * as pipenvPipfileFix from '@snyk/fix-pipenv-pipfile';
 import * as poetryFix from '@snyk/fix-poetry';

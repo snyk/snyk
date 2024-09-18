@@ -1,5 +1,5 @@
 import * as debugLib from 'debug';
-import chalk from 'chalk';
+import chalk = require('chalk');
 import { makeRequest } from '../../request';
 import { SastSettings } from './types';
 

@@ -1,5 +1,5 @@
 import { marked } from 'marked';
-import chalk from 'chalk';
+import chalk = require('chalk');
 import { reflowText } from './reflow-text';
 
 // stateful variable to control left-padding by header level

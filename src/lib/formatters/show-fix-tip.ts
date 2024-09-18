@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+import chalk = require('chalk');
 
 import { isLocalFolder } from '../detect';
 import { TestResult } from '../snyk-test/legacy';

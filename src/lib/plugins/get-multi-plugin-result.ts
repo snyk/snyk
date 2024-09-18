@@ -1,7 +1,7 @@
 import * as cloneDeep from 'lodash.clonedeep';
 import * as pathLib from 'path';
 import * as cliInterface from '@snyk/cli-interface';
-import chalk from 'chalk';
+import chalk = require('chalk');
 import { icon } from '../theme';
 import * as debugModule from 'debug';
 

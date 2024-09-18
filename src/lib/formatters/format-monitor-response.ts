@@ -1,5 +1,5 @@
 const assign = require('lodash.assign');
-import chalk from 'chalk';
+import chalk = require('chalk');
 import * as url from 'url';
 
 import { MonitorResult } from '../types';

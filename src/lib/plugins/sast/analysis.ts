@@ -22,7 +22,7 @@ import { analysisProgressUpdate } from './utils';
 import { FeatureNotSupportedBySnykCodeError } from './errors';
 import { getProxyForUrl } from 'proxy-from-env';
 import { bootstrap } from 'global-agent';
-import chalk from 'chalk';
+import chalk = require('chalk');
 import * as debugLib from 'debug';
 import { getCodeClientProxyUrl } from '../../code-config';
 import {

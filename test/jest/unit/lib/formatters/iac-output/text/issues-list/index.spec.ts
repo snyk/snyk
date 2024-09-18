@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as pathLib from 'path';
-import chalk from 'chalk';
+import chalk = require('chalk');
 import { getIacDisplayedIssues } from '../../../../../../../../src/lib/formatters/iac-output/text';
 import { colors } from '../../../../../../../../src/lib/formatters/iac-output/text/utils';
 import { FormattedOutputResultsBySeverity } from '../../../../../../../../src/lib/formatters/iac-output/text/types';

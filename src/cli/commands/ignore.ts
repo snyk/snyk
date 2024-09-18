@@ -1,5 +1,5 @@
 import * as policy from 'snyk-policy';
-import chalk from 'chalk';
+import chalk = require('chalk');
 import * as authorization from '../../lib/authorization';
 import * as auth from './auth/is-authed';
 import { apiTokenExists } from '../../lib/api-token';

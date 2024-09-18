@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+import chalk = require('chalk');
 import { CustomError } from './custom-error';
 
 export class NoSupportedSastFiles extends CustomError {

@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+import chalk = require('chalk');
 import { icon } from '../theme';
 import { TestOptions } from '../../lib/types';
 import {

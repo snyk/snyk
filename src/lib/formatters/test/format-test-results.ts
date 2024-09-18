@@ -10,7 +10,7 @@ import {
   TestResult,
   VulnMetaData,
 } from '../../snyk-test/legacy';
-import chalk from 'chalk';
+import chalk = require('chalk');
 import config from '../../config';
 import * as cloneDeep from 'lodash.clonedeep';
 import * as orderBy from 'lodash.orderby';

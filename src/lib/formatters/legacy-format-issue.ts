@@ -1,5 +1,5 @@
 const uniq = require('lodash.uniq');
-import chalk from 'chalk';
+import chalk = require('chalk');
 
 import { Options, TestOptions, ShowVulnPaths } from '../../lib/types';
 import { isLocalFolder } from '../../lib/detect';

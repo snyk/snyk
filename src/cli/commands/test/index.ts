@@ -3,7 +3,7 @@ import { EOL } from 'os';
 const cloneDeep = require('lodash.clonedeep');
 const omit = require('lodash.omit');
 const assign = require('lodash.assign');
-import chalk from 'chalk';
+import chalk = require('chalk');
 import { MissingArgError } from '../../../lib/errors';
 import * as theme from '../../../lib/theme';
 

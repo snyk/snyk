@@ -1,7 +1,7 @@
 import * as debugLib from 'debug';
 import * as pMap from 'p-map';
 import * as ora from 'ora';
-import * as chalk from 'chalk';
+import chalk = require('chalk');
 
 import * as outputFormatter from './lib/output-formatters/show-results-summary';
 import { loadPlugin } from './plugins/load-plugin';

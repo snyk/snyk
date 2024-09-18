@@ -1,5 +1,5 @@
 import * as wrap from 'wrap-ansi';
-import chalk from 'chalk';
+import chalk = require('chalk');
 
 import { LegalInstruction } from '../../lib/snyk-test/legacy';
 

@@ -1,7 +1,7 @@
 import { EOL } from 'os';
 import * as Sarif from 'sarif';
 import * as Debug from 'debug';
-import chalk from 'chalk';
+import chalk = require('chalk');
 import { icon, color } from '../../../theme';
 import { colorTextBySeverity, SEVERITY } from '../../../snyk-test/common';
 import { rightPadWithSpaces } from '../../../right-pad';

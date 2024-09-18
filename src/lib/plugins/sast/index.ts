@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+import chalk = require('chalk');
 import * as Sarif from 'sarif';
 import * as debugLib from 'debug';
 import { v4 as uuidv4 } from 'uuid';

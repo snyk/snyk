@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+import chalk = require('chalk');
 import { rightPadWithSpaces } from '../../lib/right-pad';
 import { TestOptions, Options } from '../../lib/types';
 import { TestResult } from '../../lib/snyk-test/legacy';

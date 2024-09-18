@@ -9,7 +9,7 @@ import {
   IRestErrorResponse,
   SNYK_APP_DEBUG,
 } from '.';
-import chalk from 'chalk';
+import chalk = require('chalk');
 import { AuthFailedError, InternalServerError } from '../errors';
 import * as Debug from 'debug';
 import config from '../config';

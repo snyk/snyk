@@ -6,7 +6,7 @@ import {
   UnmanagedByType,
 } from '../types';
 import { findServiceMappingForType } from '../service-mappings';
-import chalk from 'chalk';
+import chalk = require('chalk');
 import { leftPad } from 'snyk-cpp-plugin/dist/display/common';
 
 export function getHumanReadableAnalysis(
