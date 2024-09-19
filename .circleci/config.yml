@@ -119,6 +119,7 @@ executors:
     machine:
       image: windows-server-2022-gui:2024.01.1
     resource_class: windows.large
+    working_directory: /mnt/ramdisk/snyk
     shell: powershell
   win-server2019-amd64:
     machine:
