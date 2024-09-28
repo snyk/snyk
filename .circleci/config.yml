@@ -548,6 +548,31 @@ workflows:
           context: snyk-windows-signing
           requires:
             - prepare-build
+          filters:
+            branches:
+              only:
+                - main
+                - '/release.*/'
+                - '/.*e2e.*/'
+
+      - build-artifact:
+          name: build windows amd64 (no sign)
+          go_target_os: windows
+          go_os: windows
+          go_arch: amd64
+          go_download_base_url: << pipeline.parameters.fips_go_download_base_url >>
+          make_target: build clean-golang build-fips
+          install_deps_extension: windows-full-signing
+          install_path: 'C:\'
+          executor: win-server2022-amd64
+          requires:
+            - prepare-build
+          filters:
+            branches:
+              ignore:
+                - main
+                - '/release.*/'
+                - '/.*e2e.*/'
 
       - regression-tests:
           name: regression-tests
@@ -668,7 +693,7 @@ workflows:
                 - main
                 - '/release.*/'
           requires:
-            - build windows amd64
+            - build windows amd64 (no sign)
           executor: win-server2022-amd64
           test_snyk_command: binary-releases\\snyk-win.exe
           install_deps_extension: windows-full
