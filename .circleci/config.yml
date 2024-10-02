@@ -983,16 +983,6 @@ jobs:
       - run:
           name: Build TypeScript CLI
           command: npm run build:prod
-      - persist_to_workspace:
-          root: .
-          paths:
-            - binary-releases/*
-            - ts-cli-binaries/*
-            - binary-releases/fips/*
-            - node_modules/*
-            - ts-binary-wrapper/*
-            - dist/*
-            - packages/*
 
   code-analysis:
     parameters:
