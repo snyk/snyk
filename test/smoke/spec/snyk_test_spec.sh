@@ -112,7 +112,7 @@ Describe "Snyk test command"
   Describe "npm test with JSON output and all-projects flag"
     snyk_test_json_all() {
       cd ../fixtures || return
-      snyk test --json --all-projects
+      snyk test --json --all-projects -d
     }
 
     # https://github.com/snyk/snyk/pull/1324
