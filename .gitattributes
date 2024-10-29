@@ -1,0 +1,3 @@
+# Ignore the following directories when generating statistics
+test/acceptance/workspaces/** linguist-vendored
+test/fixtures/** linguist-vendored
