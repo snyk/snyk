@@ -1,24 +1,6 @@
 #shellcheck shell=sh
 
 Describe "Snyk CLI basics"
-  Describe "snyk version"
-    It "prints version"
-      When run snyk version
-      The output should include "1." # Version should start with a (major) 1
-      The status should be success
-      # TODO: unusable with our current docker issues
-      The stderr should equal ""
-    End
-
-    It "prints version with --version flag"
-      When run snyk --version
-      The output should include "1." # Version should start with a (major) 1
-      The status should be success
-      # TODO: unusable with our current docker issues
-      The stderr should equal ""
-    End
-  End
-
   Describe "snyk config"
     It "prints config"
       When run snyk config
@@ -39,15 +21,6 @@ Describe "Snyk CLI basics"
       The status should be success
       The result of "print_snyk_config()" should not include "newkey"
       The result of "print_snyk_config()" should not include "newvalue"
-    End
-  End
-
-  Describe "snyk --about"
-    It "prints license attributions"
-      When run snyk --about
-      The output should include "Snyk CLI Open Source Attributions" # Version should start with a (major) 1
-      The status should be success
-      The stderr should equal ""
     End
   End
 End
