@@ -16,7 +16,7 @@ import {
 } from '../../lib/snyk-test/legacy';
 import { formatLegalInstructions } from './legal-license-instructions';
 import { colorTextBySeverity } from '../../lib/snyk-test/common';
-import { PATH_SEPARATOR } from '../constants';
+import { PATH_SEPARATOR } from './constants';
 import { getVulnerabilityUrl } from './get-vuln-url';
 
 export function formatIssues(

@@ -20,7 +20,7 @@ import {
   BasicVulnInfo,
   UpgradesByAffectedPackage,
 } from './types';
-import { PATH_SEPARATOR } from '../constants';
+import { PATH_SEPARATOR } from './constants';
 import { getSeverityValue } from './get-severity-value';
 import { getVulnerabilityUrl } from './get-vuln-url';
 
