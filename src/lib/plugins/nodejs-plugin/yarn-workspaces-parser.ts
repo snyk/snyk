@@ -175,7 +175,7 @@ interface YarnWorkspacesMap {
   };
 }
 
-export function getWorkspacesMap(file: {
+function getWorkspacesMap(file: {
   content: string;
   fileName: string;
 }): YarnWorkspacesMap {

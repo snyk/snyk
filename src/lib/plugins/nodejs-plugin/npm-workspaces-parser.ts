@@ -135,7 +135,7 @@ interface NpmWorkspacesMap {
   };
 }
 
-export function getWorkspacesMap(file: {
+function getWorkspacesMap(file: {
   content: string;
   fileName: string;
 }): NpmWorkspacesMap {
