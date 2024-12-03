@@ -1,7 +1,7 @@
 module.exports = test;
 
 const detect = require('../detect');
-const { runTest } = require('./run-test');
+import { runTest } from './run-test';
 const chalk = require('chalk');
 const pm = require('../package-managers');
 const { UnsupportedPackageManagerError } = require('../errors');

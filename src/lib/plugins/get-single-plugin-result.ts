@@ -1,4 +1,4 @@
-import plugins = require('.');
+import * as plugins from '.'
 import { ModuleInfo } from '../module-info';
 import { legacyPlugin as pluginApi } from '@snyk/cli-interface';
 import { TestOptions, Options, MonitorOptions } from '../types';
