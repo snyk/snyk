@@ -20,7 +20,7 @@ const debug = debugModule('snyk:find-files');
  *
  * @param path file path.
  */
-export async function readDirectory(path: string): Promise<string[]> {
+async function readDirectory(path: string): Promise<string[]> {
   return await new Promise((resolve, reject) => {
     fs.readdir(path, (err, files) => {
       if (err) {
@@ -36,7 +36,7 @@ export async function readDirectory(path: string): Promise<string[]> {
  *
  * @param path path to file or directory.
  */
-export async function getStats(path: string): Promise<fs.Stats> {
+async function getStats(path: string): Promise<fs.Stats> {
   return await new Promise((resolve, reject) => {
     fs.stat(path, (err, stats) => {
       if (err) {
