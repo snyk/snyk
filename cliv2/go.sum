@@ -752,8 +752,8 @@ github.com/snyk/cli-extension-dep-graph v0.0.0-20241014075215-311d3c8a423f h1:xZ
 github.com/snyk/cli-extension-dep-graph v0.0.0-20241014075215-311d3c8a423f/go.mod h1:QF3v8HBpOpyudYNCuR8LqfULutO76c91sBdLzD+pBJU=
 github.com/snyk/cli-extension-iac-rules v0.0.0-20241008152401-24c8cf03a1a3 h1:AQMi52/aevl9bBSzwxGLz9kxInojkSe/Q6j1s1s6yJg=
 github.com/snyk/cli-extension-iac-rules v0.0.0-20241008152401-24c8cf03a1a3/go.mod h1:A/DNK3ZnUgqOKJ33Lc1z5KbbHqRSBgwCWw9KuyJu0xQ=
-github.com/snyk/cli-extension-sbom v0.0.0-20241016065306-0df2be5b3b8f h1:dlL+f+5sjHj4JCzW/Evl1x9UREXLyc3M4KjoZvQx0Bs=
-github.com/snyk/cli-extension-sbom v0.0.0-20241016065306-0df2be5b3b8f/go.mod h1:5CaY1bgvJY/uoG/1plLOf8T8o9AkwoBIGvw34RfRLZw=
+github.com/snyk/cli-extension-sbom v0.0.0-20241204134113-cd634b0deb26 h1:ffdmaf0cDoZTIeq+Dt9Vx2Dkv6tWtHpSlUuiTyogiNw=
+github.com/snyk/cli-extension-sbom v0.0.0-20241204134113-cd634b0deb26/go.mod h1:5CaY1bgvJY/uoG/1plLOf8T8o9AkwoBIGvw34RfRLZw=
 github.com/snyk/code-client-go v1.11.1 h1:k3dwlcMDNKEnML82OeZVXmt5p/YIkGFAs8usbSh4WHw=
 github.com/snyk/code-client-go v1.11.1/go.mod h1:orU911flV1kJQOlxxx0InUQkAfpBrcERsb2olfnlI8s=
 github.com/snyk/container-cli v0.0.0-20240821111304-7ca1c415a5d7 h1:Zn5BcV76oFAbJm5tDygU945lvoZ3yY8FoRFDC3YpwF8=
