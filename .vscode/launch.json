@@ -61,6 +61,16 @@
       "console": "integratedTerminal",
       "program": "node_modules/.bin/ts-node",
       "args": ["./src/cli/index.ts", "iac", "test", "--unmanaged"]
+    },
+    {
+      "name": "Attach to Go Process",
+      "type": "go",
+      "request": "attach",
+      "mode": "remote",
+      "host": "127.0.0.1",
+      "port": 2345,
+      "remotePath": "${workspaceFolder}",
+      "cwd": "${workspaceFolder}"
     }
   ]
 }

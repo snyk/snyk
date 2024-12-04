@@ -44,6 +44,18 @@ export async function scan(
   }
 }
 
+export async function resultsFromOutputFile(
+  outputFilePath: string,
+): Promise<TestOutput> {
+  const results = await readJson(outputFilePath);
+
+  if (debugOutput.enabled) {
+    debugOutput('snyk-iac-test output:\n', JSON.stringify(results, null, 2));
+  }
+
+  return mapSnykIacTestOutputToTestOutput(results);
+}
+
 async function scanWithConfig(
   options: TestConfig,
   policyEnginePath: string,

@@ -1,17 +1,15 @@
 package main
 
 // !!! This import needs to be the first import, please do not change this !!!
-import _ "github.com/snyk/go-application-framework/pkg/networking/fips_enable"
-
 import (
 	"os"
 	"strings"
 	"time"
 
 	"github.com/rs/zerolog"
-
 	"github.com/snyk/go-application-framework/pkg/configuration"
 	"github.com/snyk/go-application-framework/pkg/logging"
+	_ "github.com/snyk/go-application-framework/pkg/networking/fips_enable"
 	"github.com/snyk/go-application-framework/pkg/ui"
 
 	debug_tools "github.com/snyk/cli/cliv2/internal/debug"
@@ -50,7 +48,7 @@ func initDebugBuild() {
 	if strings.EqualFold(buildType, "debug") {
 		progress := ui.DefaultUi().NewProgressBar()
 		progress.SetTitle("Pausing execution to attach the debugger!")
-		waitTimeInSeconds := 10
+		waitTimeInSeconds := 1
 
 		for i := range waitTimeInSeconds {
 			value := float64(waitTimeInSeconds-i) / float64(waitTimeInSeconds)

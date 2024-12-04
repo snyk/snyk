@@ -1,21 +1,31 @@
 import { TestConfig } from './types';
-import { scan } from './scan';
+import { resultsFromOutputFile, scan } from './scan';
 import { TestOutput } from './scan/results';
 import { initLocalCache } from './local-cache';
 import { addIacAnalytics } from './analytics';
+import * as newDebug from 'debug';
 
 export { TestConfig } from './types';
 
-export async function test(testConfig: TestConfig): Promise<TestOutput> {
-  const { policyEnginePath, rulesBundlePath, rulesClientURL } =
-    await initLocalCache(testConfig);
+const debug = newDebug('snyk-iac');
 
-  const testOutput = await scan(
-    testConfig,
-    policyEnginePath,
-    rulesBundlePath,
-    rulesClientURL,
-  );
+export async function test(testConfig: TestConfig): Promise<TestOutput> {
+  let testOutput: TestOutput;
+  if (testConfig.iacOutputFile) {
+    testOutput = await resultsFromOutputFile(testConfig.iacOutputFile);
+  } else {
+    const { policyEnginePath, rulesBundlePath, rulesClientURL } =
+      await initLocalCache(testConfig);
+
+    debug(`[SERGIU] policyEnginePath: ${policyEnginePath}`);
+
+    testOutput = await scan(
+      testConfig,
+      policyEnginePath,
+      rulesBundlePath,
+      rulesClientURL,
+    );
+  }
 
   addIacAnalytics(testConfig, testOutput);
 

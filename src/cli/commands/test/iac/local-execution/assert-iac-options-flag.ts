@@ -43,6 +43,8 @@ const keys: (keyof IaCTestFlags)[] = [
   // Report options
   'remote-repo-url',
   'target-name',
+  // Hidden flags
+  'iac-test-output-file',
 ];
 const integratedKeys: (keyof IaCTestFlags)[] = ['snyk-cloud-environment'];
 
