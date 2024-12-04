@@ -18,7 +18,7 @@ import { IaCErrorCodes } from './test/iac/local-execution/types';
 import { getErrorStringCode } from './test/iac/local-execution/error-utils';
 import { DescribeOptions } from '../../lib/iac/types';
 
-export class FlagError extends CustomError {
+class FlagError extends CustomError {
   constructor(flag: string) {
     const msg = `Unsupported flag "${flag}" provided. Run snyk iac describe --help for supported flags`;
     super(msg);

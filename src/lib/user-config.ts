@@ -1,6 +1,5 @@
 const Configstore = require('configstore');
-
-export class ConfigStoreWithEnvironmentVariables extends Configstore {
+class ConfigStoreWithEnvironmentVariables extends Configstore {
   constructor(id, defaults = undefined, options = {}) {
     super(id, defaults, options);
   }
