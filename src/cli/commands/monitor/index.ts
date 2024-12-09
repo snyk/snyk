@@ -54,11 +54,6 @@ import { normalizeTargetFile } from '../../../lib/normalize-target-file';
 
 const SEPARATOR = '\n-------------------------------------------------------\n';
 const debug = Debug('snyk');
-const appVulnsReleaseWarningMsg = `${theme.icon.WARNING} Important: Beginning January 24th, 2023, application dependencies in container
-images will be scanned by default when using the snyk container test/monitor
-commands. If you are using Snyk in a CI pipeline, action may be required. Read
-https://snyk.io/blog/securing-container-applications-using-the-snyk-cli/ for
-more info.`;
 
 // This is used instead of `let x; try { x = await ... } catch { cleanup }` to avoid
 // declaring the type of x as possibly undefined.
@@ -109,18 +104,6 @@ export default async function monitor(...args0: MethodArgs): Promise<any> {
         'containerCliAppVulnsEnabled',
         options,
       ));
-
-      // we can't print the warning message with JSON output as that would make
-      // the JSON output invalid.
-      // We also only want to print the message if the user did not overwrite
-      // the default with one of the flags.
-      if (
-        options['exclude-app-vulns'] &&
-        !options['json'] &&
-        !options['sarif']
-      ) {
-        console.log(theme.color.status.warn(appVulnsReleaseWarningMsg));
-      }
     }
   }
 
