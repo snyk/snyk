@@ -67,6 +67,7 @@ async function prepareTestConfig(
   const insecure = options.insecure;
   const customRules = options['custom-rules'];
   const experimental = options.experimental;
+  const iacOutputFile = getFlag(options, 'iac-test-output-file');
 
   return {
     paths: relativePaths,
@@ -89,5 +90,6 @@ async function prepareTestConfig(
     customRules,
     experimental,
     iacNewEngine,
+    iacOutputFile,
   };
 }

@@ -38,6 +38,7 @@ const keys: (keyof IaCTestFlags)[] = [
   'remote-repo-url',
   'target-name',
   'target-reference',
+  'iac-test-output-file',
 ];
 const allowed = new Set<string>(keys);
 
