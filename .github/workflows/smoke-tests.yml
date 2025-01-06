@@ -131,7 +131,7 @@ jobs:
           echo $env:PATH
           sh ./test/smoke/install-snyk-binary-win.sh
 
-     - name: Install test utilities with homebrew on macOS
+      - name: Install test utilities with homebrew on macOS
         if: ${{ matrix.os == 'macos' }}
         # We need "timeout" and "jq" util and we'll use brew to check our brew package as well
         run: |
