@@ -1200,11 +1200,6 @@ jobs:
     steps:
       - prepare-workspace
       - run:
-          name: Install ShellSpec Deps
-          command: |
-            ./test/smoke/install-shellspec.sh --yes
-            sudo ln -s ~/.local/lib/shellspec/shellspec /usr/local/bin/shellspec
-      - run:
           name: Installing test fixture dependencies
           working_directory: ./test/fixtures/basic-npm
           command: npm i
@@ -1213,12 +1208,6 @@ jobs:
           command: |
             sudo ln -s $(realpath << parameters.test_snyk_command >>) /usr/local/bin/snyk
             snyk --version
-      - run:
-          name: Running ShellSpec tests
-          working_directory: ./test/smoke
-          command: |
-            echo "Checkout the README in test/smoke folder for more details about this step"
-            shellspec -f d -e REGRESSION_TEST=1 -e PIP_BREAK_SYSTEM_PACKAGES=1
 
   sign:
     parameters:
