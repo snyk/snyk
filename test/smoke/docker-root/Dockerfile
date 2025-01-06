@@ -11,7 +11,6 @@ RUN apt-get install -y wget unzip \
     && unzip -d /opt/gradle /tmp/gradle-7.2-bin.zip \
     && ln -s /opt/gradle/gradle-7.2/bin/gradle /usr/bin/gradle
 
-RUN /snyk/smoke/install-shellspec.sh --yes
 ENV PATH="/root/.local/bin:${PATH}"
 
 WORKDIR /snyk/smoke/

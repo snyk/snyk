@@ -1,9 +1,8 @@
-FROM shellspec/shellspec:latest
+FROM alpine:latest
 
 COPY ./smoke/ /snyk/smoke/
 COPY ./fixtures/ /snyk/fixtures/
 
-RUN shellspec --version
 RUN apk add curl jq libgcc libstdc++
 
 # Install Gradle
