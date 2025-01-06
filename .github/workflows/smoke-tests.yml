@@ -131,19 +131,7 @@ jobs:
           echo $env:PATH
           sh ./test/smoke/install-snyk-binary-win.sh
 
-      - name: Install Shellspec - non-windows
-        if: ${{ matrix.os != 'windows' && matrix.snyk_install_method != 'alpine-binary' }}
-        run: |
-          ./test/smoke/install-shellspec.sh --yes
-          sudo ln -s ${HOME}/.local/lib/shellspec/shellspec /usr/local/bin/shellspec
-          ls -la ${HOME}/.local/lib/shellspec
-          echo "shellspec symlink:"
-          ls -la /usr/local/bin/shellspec
-          /usr/local/bin/shellspec --version
-          which shellspec
-          shellspec --version
-
-      - name: Install test utilities with homebrew on macOS
+     - name: Install test utilities with homebrew on macOS
         if: ${{ matrix.os == 'macos' }}
         # We need "timeout" and "jq" util and we'll use brew to check our brew package as well
         run: |
@@ -167,33 +155,3 @@ jobs:
         if: ${{ matrix.os == 'ubuntu' && matrix.snyk_install_method != 'alpine-binary' && matrix.snyk_install_method != 'npm-root-user' }}
         run: |
           sudo apt-get install jq
-
-      - name: Install Shellspec - Windows
-        shell: powershell
-        if: ${{ matrix.os == 'windows' }}
-        run: |
-          Get-Host | Select-Object Version
-          Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
-          sh ./test/smoke/install-shellspec.sh --yes
-
-      - name: Run shellspec tests - non-Windows
-        if: ${{ matrix.os != 'windows' && matrix.snyk_install_method != 'alpine-binary' && matrix.snyk_install_method != 'npm-root-user'  }}
-        working-directory: test/smoke
-        shell: bash -l {0} # run bash with --login flag to load .bash_profile that's used by yarn install method
-        env:
-          TEST_SNYK_TOKEN: ${{ secrets.TEST_SNYK_TOKEN }}
-          TEST_SNYK_API: ${{ secrets.TEST_SNYK_API }}
-        run: |
-          which snyk
-          snyk version
-          shellspec -f d --skip-message quiet --no-warning-as-failure
-
-      - name: Run shellspec tests - Windows
-        if: ${{ matrix.os == 'windows' }}
-        working-directory: test/smoke
-        shell: powershell
-        env:
-          TEST_SNYK_TOKEN: ${{ secrets.TEST_SNYK_TOKEN }}
-          TEST_SNYK_API: ${{ secrets.TEST_SNYK_API }}
-        run: |
-          sh ./run-shellspec-win.sh

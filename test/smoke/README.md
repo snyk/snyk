@@ -21,13 +21,6 @@ To run these tests locally you may use `npm run test:smoke`:
 
 1. Install:
 
-   - [Shellspec](https://shellspec.info) reccomended installation is through brew:
-
-     - ### Install the latest stable version of shell spec
-     - brew tap shellspec/shellspec
-     - brew install shellspec
-
-   - [jq](https://stedolan.github.io/jq/)
    - timeout (if not available on your platform)
 
 2. Install dependencies for the local fixture `test/fixtures/basic-npm` with `npm install --prefix test/fixtures/basic-npm`
