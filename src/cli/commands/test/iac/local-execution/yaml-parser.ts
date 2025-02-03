@@ -1,3 +1,4 @@
+import { CLI } from '@snyk/error-catalog-nodejs-public';
 import { CustomError } from '../../../../../lib/errors';
 import { getErrorStringCode } from './error-utils';
 import { IaCErrorCodes, IacFileData } from './types';
@@ -23,21 +24,25 @@ export function parseYAMLOrJSONFileData(fileData: IacFileData): any[] {
 export class InvalidJsonFileError extends CustomError {
   public filename: string;
   constructor(filename: string) {
+    const usrMsg = `We were unable to parse the JSON file "${filename}". Please ensure that it contains properly structured JSON`;
     super('Failed to parse JSON file');
     this.code = IaCErrorCodes.InvalidJsonFileError;
     this.strCode = getErrorStringCode(this.code);
     this.filename = filename;
-    this.userMessage = `We were unable to parse the JSON file "${filename}". Please ensure that it contains properly structured JSON`;
+    this.userMessage = usrMsg;
+    this.errorCatalog = new CLI.GeneralIACFailureError(usrMsg);
   }
 }
 
 export class InvalidYamlFileError extends CustomError {
   public filename: string;
   constructor(filename: string) {
+    const usrMsg = `We were unable to parse the YAML file "${filename}". Please ensure that it contains properly structured YAML, without any template directives`;
     super('Failed to parse YAML file');
     this.code = IaCErrorCodes.InvalidYamlFileError;
     this.strCode = getErrorStringCode(this.code);
     this.filename = filename;
-    this.userMessage = `We were unable to parse the YAML file "${filename}". Please ensure that it contains properly structured YAML, without any template directives`;
+    this.userMessage = usrMsg;
+    this.errorCatalog = new CLI.GeneralIACFailureError(usrMsg);
   }
 }

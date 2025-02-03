@@ -7,6 +7,7 @@ import { LOCAL_POLICY_ENGINE_DIR } from '../local-cache';
 import * as Debug from 'debug';
 import { createIacDir } from '../file-utils';
 import { OciRegistry } from './oci-registry';
+import { CLI } from '@snyk/error-catalog-nodejs-public';
 const debug = Debug('iac-oci-pull');
 
 export const CUSTOM_RULES_TARBALL = 'custom-bundle.tar.gz';
@@ -75,39 +76,45 @@ export async function pull(
 
 export class FailedToBuildOCIArtifactError extends CustomError {
   constructor(message?: string) {
+    const usrMsg =
+      'We were unable to build the remote OCI Artifact locally, please ensure that the local directory is writeable.';
     super(message || 'Could not build OCI Artifact');
     this.code = IaCErrorCodes.FailedToBuildOCIArtifactError;
     this.strCode = getErrorStringCode(this.code);
-    this.userMessage =
-      'We were unable to build the remote OCI Artifact locally, please ensure that the local directory is writeable.';
+    this.userMessage = usrMsg;
+    this.errorCatalog = new CLI.GeneralIACFailureError(usrMsg);
   }
 }
 
 export class InvalidManifestSchemaVersionError extends CustomError {
   constructor(message?: string) {
+    const usrMsg = `Invalid manifest schema version: ${message}. We currently support Image Manifest Version 2, Schema 2`;
     super(message || 'Invalid manifest schema version');
     this.code = IaCErrorCodes.InvalidRemoteRegistryURLError;
     this.strCode = getErrorStringCode(this.code);
-    this.userMessage = `Invalid manifest schema version: ${message}. We currently support Image Manifest Version 2, Schema 2`;
+    this.userMessage = usrMsg;
+    this.errorCatalog = new CLI.GeneralIACFailureError(usrMsg);
   }
 }
 
 export class InvalidRemoteRegistryURLError extends CustomError {
   constructor(url?: string) {
+    const usrMsg = `The provided remote registry URL${url ? `: "${url}"` : ''} is invalid. Please check it again.`;
     super('Invalid URL for Remote Registry');
     this.code = IaCErrorCodes.InvalidRemoteRegistryURLError;
     this.strCode = getErrorStringCode(this.code);
-    this.userMessage = `The provided remote registry URL${
-      url ? `: "${url}"` : ''
-    } is invalid. Please check it again.`;
+    this.userMessage = usrMsg;
+    this.errorCatalog = new CLI.GeneralIACFailureError(usrMsg);
   }
 }
 
 export class UnsupportedEntitlementPullError extends CustomError {
   constructor(entitlement: string) {
+    const usrMsg = `The custom rules feature is currently not supported for this org. To enable it, please contact snyk support.`;
     super(`OCI Pull not supported - Missing the ${entitlement} entitlement`);
     this.code = IaCErrorCodes.UnsupportedEntitlementPullError;
     this.strCode = getErrorStringCode(this.code);
-    this.userMessage = `The custom rules feature is currently not supported for this org. To enable it, please contact snyk support.`;
+    this.userMessage = usrMsg;
+    this.errorCatalog = new CLI.GeneralIACFailureError(usrMsg);
   }
 }

@@ -10,6 +10,7 @@ import { getErrorStringCode } from './error-utils';
 import config from '../../../../../lib/config';
 import { streamRequest } from '../../../../../lib/request/request';
 import envPaths from 'env-paths';
+import { CLI } from '@snyk/error-catalog-nodejs-public';
 
 const debug = Debug('iac-local-cache');
 
@@ -171,48 +172,58 @@ export function cleanLocalCache() {
 
 export class FailedToInitLocalCacheError extends CustomError {
   constructor(message?: string) {
+    const usrMsg =
+      'We were unable to create a local directory to store the test assets, please ensure that the current working directory is writable';
     super(message || 'Failed to initialize local cache');
     this.code = IaCErrorCodes.FailedToInitLocalCacheError;
     this.strCode = getErrorStringCode(this.code);
-    this.userMessage =
-      'We were unable to create a local directory to store the test assets, please ensure that the current working directory is writable';
+    this.userMessage = usrMsg;
+    this.errorCatalog = new CLI.GeneralIACFailureError(usrMsg);
   }
 }
 
 export class FailedToDownloadRulesError extends CustomError {
   constructor(message?: string) {
+    const usrMsg =
+      'We were unable to download the security rules, please ensure the network can access https://downloads.snyk.io';
     super(message || 'Failed to download policies');
     this.code = IaCErrorCodes.FailedToDownloadRulesError;
     this.strCode = getErrorStringCode(this.code);
-    this.userMessage =
-      'We were unable to download the security rules, please ensure the network can access https://downloads.snyk.io';
+    this.userMessage = usrMsg;
+    this.errorCatalog = new CLI.GeneralIACFailureError(usrMsg);
   }
 }
 
 export class FailedToExtractCustomRulesError extends CustomError {
   constructor(path: string, message?: string) {
+    const usrMsg = `We were unable to extract the rules provided at: ${path}. The provided bundle may be corrupted or invalid. Please ensure it was generated using the 'snyk-iac-rules' SDK`;
     super(message || 'Failed to download policies');
     this.code = IaCErrorCodes.FailedToExtractCustomRulesError;
     this.strCode = getErrorStringCode(this.code);
-    this.userMessage = `We were unable to extract the rules provided at: ${path}. The provided bundle may be corrupted or invalid. Please ensure it was generated using the 'snyk-iac-rules' SDK`;
+    this.userMessage = usrMsg;
+    this.errorCatalog = new CLI.GeneralIACFailureError(usrMsg);
   }
 }
 
 export class InvalidCustomRules extends CustomError {
   constructor(path: string, message?: string) {
+    const usrMsg = `We were unable to extract the rules provided at: ${path}. The provided bundle does not match the required structure. Please ensure it was generated using the 'snyk-iac-rules' SDK`;
     super(message || 'Invalid custom rules bundle');
     this.code = IaCErrorCodes.InvalidCustomRules;
     this.strCode = getErrorStringCode(this.code);
-    this.userMessage = `We were unable to extract the rules provided at: ${path}. The provided bundle does not match the required structure. Please ensure it was generated using the 'snyk-iac-rules' SDK`;
+    this.userMessage = usrMsg;
+    this.errorCatalog = new CLI.GeneralIACFailureError(usrMsg);
   }
 }
 
 export class InvalidCustomRulesPath extends CustomError {
   constructor(path: string, message?: string) {
+    const usrMsg = `We were unable to extract the rules provided at: ${path}. The bundle at the provided path does not exist`;
     super(message || 'Invalid path to custom rules bundle');
     this.code = IaCErrorCodes.InvalidCustomRulesPath;
     this.strCode = getErrorStringCode(this.code);
-    this.userMessage = `We were unable to extract the rules provided at: ${path}. The bundle at the provided path does not exist`;
+    this.userMessage = usrMsg;
+    this.errorCatalog = new CLI.GeneralIACFailureError(usrMsg);
   }
 }
 

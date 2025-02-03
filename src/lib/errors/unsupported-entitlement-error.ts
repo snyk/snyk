@@ -1,3 +1,4 @@
+import { OpenAPI } from '@snyk/error-catalog-nodejs-public';
 import { CustomError } from './custom-error';
 
 export class UnsupportedEntitlementError extends CustomError {
@@ -9,13 +10,13 @@ export class UnsupportedEntitlementError extends CustomError {
     entitlement: string,
     userMessage = `This feature is currently not enabled for your org. To enable it, please contact snyk support.`,
   ) {
-    super(
-      `Unsupported feature - Missing the ${
-        entitlement ? entitlement : 'required'
-      } entitlement`,
-    );
+    const msg = `Unsupported feature - Missing the ${
+      entitlement ? entitlement : 'required'
+    } entitlement`;
+    super(msg);
     this.entitlement = entitlement;
     this.code = UnsupportedEntitlementError.ERROR_CODE;
     this.userMessage = userMessage;
+    this.errorCatalog = new OpenAPI.ForbiddenError(msg);
   }
 }

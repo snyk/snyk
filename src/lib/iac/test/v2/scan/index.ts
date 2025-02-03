@@ -13,6 +13,7 @@ import config from '../../../../config';
 import { api, getOAuthToken } from '../../../../api-token';
 import envPaths from 'env-paths';
 import * as analytics from '../../../../analytics';
+import { CLI } from '@snyk/error-catalog-nodejs-public';
 
 const debug = newDebug('snyk-iac');
 const debugOutput = newDebug('snyk-iac:output');
@@ -339,9 +340,11 @@ async function spawn(
 
 class ScanError extends CustomError {
   constructor(message: string) {
+    const usrMsg = 'An error occurred when running the scan';
     super(message);
     this.code = IaCErrorCodes.PolicyEngineScanError;
     this.strCode = getErrorStringCode(this.code);
-    this.userMessage = 'An error occurred when running the scan';
+    this.userMessage = usrMsg;
+    this.errorCatalog = new CLI.GeneralIACFailureError(usrMsg);
   }
 }

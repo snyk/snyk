@@ -36,6 +36,7 @@ import {
 import * as wrapAnsi from 'wrap-ansi';
 import { formatIacTestWarnings } from '../../../formatters/iac-output/text/failures/list';
 import { IacV2Name, IacV2ShortLink } from '../../constants';
+import { CLI } from '@snyk/error-catalog-nodejs-public';
 
 export function buildOutput({
   scanResult,
@@ -326,5 +327,6 @@ export class FoundIssuesError extends CustomError {
     this.userMessage = responseData.response;
     this.jsonStringifiedResults = responseData.json;
     this.sarifStringifiedResults = responseData.sarif;
+    this.errorCatalog = new CLI.GeneralIACFailureError(responseData.response);
   }
 }
