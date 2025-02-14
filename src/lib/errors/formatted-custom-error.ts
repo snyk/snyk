@@ -1,5 +1,6 @@
 import chalk from 'chalk';
 import { CustomError } from '.';
+import { CLI } from '@snyk/error-catalog-nodejs-public';
 
 export class FormattedCustomError extends CustomError {
   public formattedUserMessage: string;
@@ -12,5 +13,8 @@ export class FormattedCustomError extends CustomError {
     super(message);
     this.userMessage = userMessage || chalk.reset(formattedUserMessage);
     this.formattedUserMessage = formattedUserMessage;
+    this.errorCatalog = new CLI.GeneralCLIFailureError(
+      userMessage || formattedUserMessage,
+    );
   }
 }

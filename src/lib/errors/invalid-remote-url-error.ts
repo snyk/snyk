@@ -1,3 +1,4 @@
+import { CLI } from '@snyk/error-catalog-nodejs-public';
 import { CustomError } from './custom-error';
 
 export class InvalidRemoteUrlError extends CustomError {
@@ -6,5 +7,8 @@ export class InvalidRemoteUrlError extends CustomError {
 
   constructor() {
     super(InvalidRemoteUrlError.ERROR_MESSAGE);
+    this.errorCatalog = new CLI.InvalidFlagOptionError(
+      InvalidRemoteUrlError.ERROR_MESSAGE,
+    );
   }
 }

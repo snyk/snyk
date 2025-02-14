@@ -2,6 +2,7 @@ import { makeRequest } from '../../../../../lib/request';
 import config from '../../../../../lib/config';
 import { getAuthHeader } from '../../../../../lib/api-token';
 import { CustomError } from '../../../../../lib/errors';
+import { CLI } from '@snyk/error-catalog-nodejs-public';
 
 export async function trackUsage(
   formattedResults: TrackableResult[],
@@ -39,9 +40,10 @@ export async function trackUsage(
 
 export class TestLimitReachedError extends CustomError {
   constructor() {
-    super(
-      'Test limit reached! You have exceeded your infrastructure as code test allocation for this billing period.',
-    );
+    const msg =
+      'Test limit reached! You have exceeded your infrastructure as code test allocation for this billing period.';
+    super(msg);
+    this.errorCatalog = new CLI.GeneralIACFailureError(msg);
   }
 }
 

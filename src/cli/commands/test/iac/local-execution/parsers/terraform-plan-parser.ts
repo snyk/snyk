@@ -16,6 +16,7 @@ import {
 import { CustomError } from '../../../../../../lib/errors';
 import { getErrorStringCode } from '../error-utils';
 import { IacProjectType } from '../../../../../../lib/iac/constants';
+import { CLI } from '@snyk/error-catalog-nodejs-public';
 
 function terraformPlanReducer(
   scanInput: TerraformScanInput,
@@ -183,12 +184,14 @@ export function tryParsingTerraformPlan(
 // This error is due to the complex reduction logic, so it catches scenarios we might have not covered.
 export class FailedToExtractResourcesInTerraformPlanError extends CustomError {
   constructor(message?: string) {
+    const usrMsg =
+      'We failed to extract resource changes from the Terraform plan file, please contact support@snyk.io, if possible with a redacted version of the file';
     super(
       message || 'Failed to extract resources from Terraform plan JSON file',
     );
     this.code = IaCErrorCodes.FailedToExtractResourcesInTerraformPlanError;
     this.strCode = getErrorStringCode(this.code);
-    this.userMessage =
-      'We failed to extract resource changes from the Terraform plan file, please contact support@snyk.io, if possible with a redacted version of the file';
+    this.userMessage = usrMsg;
+    this.errorCatalog = new CLI.GeneralIACFailureError(usrMsg);
   }
 }

@@ -1,3 +1,4 @@
+import { CLI } from '@snyk/error-catalog-nodejs-public';
 import { getErrorStringCode } from '../../../../cli/commands/test/iac/local-execution/error-utils';
 import { IaCErrorCodes } from '../../../../cli/commands/test/iac/local-execution/types';
 import { CustomError } from '../../../errors';
@@ -68,13 +69,15 @@ export class SnykIacTestError extends CustomError {
     super(scanError.message);
     this.code = scanError.code;
     this.strCode = getErrorStringCode(this.code);
-    this.userMessage = getErrorUserMessage(this.code, scanError.message);
+    const usrMsg = getErrorUserMessage(this.code, scanError.message);
+    this.userMessage = usrMsg;
     this.fields = Object.assign(
       {
         path: '',
       },
       scanError.fields,
     );
+    this.errorCatalog = new CLI.GeneralIACFailureError(usrMsg);
   }
 
   public get path(): string {

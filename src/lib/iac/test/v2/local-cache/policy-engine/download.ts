@@ -14,6 +14,7 @@ import {
   policyEngineReleaseVersion,
 } from './constants';
 import { saveFile } from '../../../../file-utils';
+import { CLI } from '@snyk/error-catalog-nodejs-public';
 
 const debugLog = createDebugLogger('snyk-iac');
 
@@ -62,12 +63,14 @@ export const policyEngineUrl = `https://downloads.snyk.io/cli/iac/test/v${policy
 
 export class FailedToDownloadPolicyEngineError extends CustomError {
   constructor() {
+    const usrMsg =
+      `Could not fetch cache resource from: ${policyEngineUrl}` +
+      '\nEnsure valid network connection.';
     super(`Failed to download cache resource from ${policyEngineUrl}`);
     this.code = IaCErrorCodes.FailedToDownloadPolicyEngineError;
     this.strCode = getErrorStringCode(this.code);
-    this.userMessage =
-      `Could not fetch cache resource from: ${policyEngineUrl}` +
-      '\nEnsure valid network connection.';
+    this.userMessage = usrMsg;
+    this.errorCatalog = new CLI.GeneralIACFailureError(usrMsg);
   }
 }
 
@@ -105,11 +108,13 @@ async function cache(
 
 export class FailedToCachePolicyEngineError extends CustomError {
   constructor(savePath: string) {
+    const usrMsg =
+      `Could not write the downloaded cache resource to: ${savePath}` +
+      '\nEnsure the cache directory is writable.';
     super(`Failed to cache Policy Engine executable to ${savePath}`);
     this.code = IaCErrorCodes.FailedToCachePolicyEngineError;
     this.strCode = getErrorStringCode(this.code);
-    this.userMessage =
-      `Could not write the downloaded cache resource to: ${savePath}` +
-      '\nEnsure the cache directory is writable.';
+    this.userMessage = usrMsg;
+    this.errorCatalog = new CLI.GeneralIACFailureError(usrMsg);
   }
 }

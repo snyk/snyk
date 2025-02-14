@@ -13,6 +13,7 @@ import { CustomError } from '../../../../../lib/errors';
 import { getErrorStringCode } from './error-utils';
 import { IacFileInDirectory } from '../../../../../lib/types';
 import { SEVERITIES } from '../../../../../lib/snyk-test/common';
+import { CLI } from '@snyk/error-catalog-nodejs-public';
 
 export async function scanFiles(parsedFiles: Array<IacFileParsed>): Promise<{
   scannedFiles: IacFileScanResult[];
@@ -165,19 +166,23 @@ class PolicyEngine {
 
 export class FailedToBuildPolicyEngine extends CustomError {
   constructor(message?: string) {
-    super(message || 'Failed to build policy engine');
+    const msg = message || 'Failed to build policy engine';
+    super(msg);
     this.code = IaCErrorCodes.FailedToBuildPolicyEngine;
     this.strCode = getErrorStringCode(this.code);
     this.userMessage =
       'We were unable to run the test. Please run the command again with the `-d` flag and contact support@snyk.io with the contents of the output';
+    this.errorCatalog = new CLI.GeneralIACFailureError(msg);
   }
 }
 export class FailedToExecutePolicyEngine extends CustomError {
   constructor(message?: string) {
-    super(message || 'Failed to execute policy engine');
+    const msg = message || 'Failed to execute policy engine';
+    super(msg);
     this.code = IaCErrorCodes.FailedToExecutePolicyEngine;
     this.strCode = getErrorStringCode(this.code);
     this.userMessage =
       'We were unable to run the test. Please run the command again with the `-d` flag and contact support@snyk.io with the contents of the output';
+    this.errorCatalog = new CLI.GeneralIACFailureError(msg);
   }
 }

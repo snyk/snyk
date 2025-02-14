@@ -19,6 +19,7 @@ import {
 } from '@snyk/cloud-config-parser';
 import * as path from 'path';
 import { isLocalFolder } from '../../../../../../lib/detect';
+import { CLI } from '@snyk/error-catalog-nodejs-public';
 
 const severitiesArray = SEVERITIES.map((s) => s.verboseName);
 
@@ -167,11 +168,13 @@ export function filterPoliciesBySeverity(
 
 export class FailedToFormatResults extends CustomError {
   constructor(message?: string) {
+    const usrMsg =
+      'We failed printing the results, please contact support@snyk.io';
     super(message || 'Failed to format results');
     this.code = IaCErrorCodes.FailedToFormatResults;
     this.strCode = getErrorStringCode(this.code);
-    this.userMessage =
-      'We failed printing the results, please contact support@snyk.io';
+    this.userMessage = usrMsg;
+    this.errorCatalog = new CLI.GeneralIACFailureError(usrMsg);
   }
 }
 
