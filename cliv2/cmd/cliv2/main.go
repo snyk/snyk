@@ -21,6 +21,7 @@ import (
 	"github.com/snyk/cli-extension-iac-rules/iacrules"
 	"github.com/snyk/cli-extension-sbom/pkg/sbom"
 	"github.com/snyk/container-cli/pkg/container"
+	"github.com/snyk/error-catalog-golang-public/snyk_errors"
 	"github.com/snyk/go-application-framework/pkg/analytics"
 	"github.com/snyk/go-application-framework/pkg/app"
 	"github.com/snyk/go-application-framework/pkg/configuration"
@@ -462,9 +463,14 @@ func displayError(err error, userInterface ui.UserInterface, config configuratio
 		}
 
 		if config.GetBool(output_workflow.OUTPUT_CONFIG_KEY_JSON) {
+			message := getErrorMessage(err)
+			if message == "" {
+				return
+			}
+
 			jsonError := JsonErrorStruct{
 				Ok:       false,
-				ErrorMsg: err.Error(),
+				ErrorMsg: message,
 				Path:     globalConfiguration.GetString(configuration.INPUT_DIRECTORY),
 			}
 
@@ -481,6 +487,23 @@ func displayError(err error, userInterface ui.UserInterface, config configuratio
 			}
 		}
 	}
+}
+
+// getErrorMessage returns the appropriate error message for the specified error, while also looking for the output suppessions in case of errors coming from the IPC.
+// Defaults to the standard error message method, but if the error contains a match for the Error Catalog model, the returned value will become the detail field.
+func getErrorMessage(err error) string {
+	message := err.Error()
+	snykErr := snyk_errors.Error{}
+	if errors.As(err, &snykErr) {
+		message = snykErr.Detail
+
+		// Supressions means the TS CLI already handled the output for the error.
+		if suppress, ok := snykErr.Meta["suppressJsonOutput"].(bool); ok && suppress {
+			return ""
+		}
+	}
+
+	return message
 }
 
 func MainWithErrorCode() (int, []error) {
@@ -543,6 +566,9 @@ func MainWithErrorCode() (int, []error) {
 	outputWorkflow, _ := globalEngine.GetWorkflow(localworkflows.WORKFLOWID_OUTPUT_WORKFLOW)
 	outputFlags := workflow.FlagsetFromConfigurationOptions(outputWorkflow.GetConfigurationOptions())
 	rootCommand.PersistentFlags().AddFlagSet(outputFlags)
+	// add output flags as persistent flags
+	_ = rootCommand.ParseFlags(os.Args)
+	globalConfiguration.AddFlagSet(rootCommand.LocalFlags())
 
 	// add workflows as commands
 	createCommandsForWorkflows(rootCommand, globalEngine)

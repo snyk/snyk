@@ -485,6 +485,14 @@ func (c *CLI) getErrorFromFile(errFilePath string) (data error, err error) {
 		errs := make([]error, len(jsonErrors)+1)
 		for _, jerr := range jsonErrors {
 			jerr.Meta["orign"] = "Typescript-CLI"
+
+			// NOTE: Output suppression is only set if the invocation uses the --json flag. There's no need for output suppression if the invocation
+			// does NOT use StdIO (meaning the TS CLI is handling the user output directly), so we can disable the suppression in order to surface this errors properly.
+			useStdIO := c.globalConfig.GetBool(configuration.WORKFLOW_USE_STDIO)
+			if _, ok := jerr.Meta["suppressJsonOutput"].(bool); ok && !useStdIO {
+				jerr.Meta["suppressJsonOutput"] = false
+			}
+
 			errs = append(errs, jerr)
 		}
 
