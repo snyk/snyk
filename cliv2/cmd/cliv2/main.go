@@ -473,11 +473,13 @@ func displayError(err error, userInterface ui.UserInterface, config configuratio
 			if errors.Is(err, context.DeadlineExceeded) {
 				err = fmt.Errorf("command timed out")
 			}
+			userInterface.SetContext(
+				ui.WithInteractionId(interactionId),
+			)
 			uiError := userInterface.OutputError(err)
 			if uiError != nil {
 				globalLogger.Err(uiError).Msg("ui failed to show error")
 			}
-			userInterface.Output(fmt.Sprintf("\nID: %s", interactionId))
 		}
 	}
 }

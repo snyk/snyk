@@ -628,8 +628,8 @@ func Test_displayError(t *testing.T) {
 
 	t.Run("prints out generic error messages", func(t *testing.T) {
 		err := errors.New("test error")
+		userInterface.EXPECT().SetContext(gomock.Any()).Times(2)
 		userInterface.EXPECT().OutputError(err).Times(1)
-		userInterface.EXPECT().Output(gomock.Any()).Times(1)
 
 		config := configuration.NewWithOpts(configuration.WithAutomaticEnv())
 		displayError(err, userInterface, config)
