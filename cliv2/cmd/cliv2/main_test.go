@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -44,9 +45,32 @@ func Test_MainWithErrorCode(t *testing.T) {
 	os.Args = []string{"snyk", "--version"}
 	defer func() { os.Args = oldArgs }()
 
-	err := MainWithErrorCode()
+	errCode, _ := MainWithErrorCode()
 
-	assert.Equal(t, 0, err)
+	assert.Equal(t, 0, errCode)
+
+	t.Run("outputs an error list", func(t *testing.T) {
+		t.Setenv("SNYK_TOKEN", "invalidToken")
+		defer cleanup()
+		oldArgs := append([]string{}, os.Args...)
+		os.Args = []string{"snyk", "whoami", "--experimental"}
+		defer func() {
+			os.Args = oldArgs
+		}()
+
+		errCode, errs := MainWithErrorCode()
+		assert.Equal(t, 2, errCode)
+
+		unauthorizedErrorCode := "SNYK-0005"
+		var actualErrorCodes []string
+		for _, err := range errs {
+			var snykError snyk_errors.Error
+			if errors.As(err, &snykError) {
+				actualErrorCodes = append(actualErrorCodes, snykError.ErrorCode)
+			}
+		}
+		assert.Contains(t, actualErrorCodes, unauthorizedErrorCode)
+	})
 }
 
 func Test_initApplicationConfiguration_DisablesAnalytics(t *testing.T) {
@@ -605,10 +629,10 @@ func Test_displayError(t *testing.T) {
 
 	t.Run("prints out generic error messages", func(t *testing.T) {
 		err := errors.New("test error")
-		userInterface.EXPECT().OutputError(err).Times(1)
+		userInterface.EXPECT().OutputError(err, gomock.Any()).Times(1)
 
 		config := configuration.NewWithOpts(configuration.WithAutomaticEnv())
-		displayError(err, userInterface, config)
+		displayError(err, userInterface, config, context.Background())
 	})
 
 	scenarios := []struct {
@@ -629,16 +653,16 @@ func Test_displayError(t *testing.T) {
 		t.Run(fmt.Sprintf("%s does not display anything", scenario.name), func(t *testing.T) {
 			config := configuration.NewWithOpts(configuration.WithAutomaticEnv())
 			err := scenario.err
-			displayError(err, userInterface, config)
+			displayError(err, userInterface, config, context.Background())
 		})
 	}
 
 	t.Run("prints messages of error wrapping exec.ExitError", func(t *testing.T) {
 		err := &wrErr{wraps: &exec.ExitError{}}
-		userInterface.EXPECT().OutputError(err).Times(1)
+		userInterface.EXPECT().OutputError(err, gomock.Any()).Times(1)
 
 		config := configuration.NewWithOpts(configuration.WithAutomaticEnv())
-		displayError(err, userInterface, config)
+		displayError(err, userInterface, config, context.Background())
 	})
 }
 

@@ -74,7 +74,7 @@ Example: `$ snyk container test --json`
 
 ### `--target-reference=<TARGET_REFERENCE>`
 
-Specify a reference that differentiates this project, for example, a branch name or version. Projects having the same reference can be grouped based on that reference.&#x20;
+Specify a reference that differentiates this project, for example, a branch name or version. Projects having the same reference can be grouped based on that reference.
 
 For more information see [Group projects by branch or version for monitoring](https://docs.snyk.io/snyk-cli/scan-and-maintain-projects-using-the-cli/group-projects-by-branch-or-version-for-monitoring)
 
@@ -136,9 +136,11 @@ For more information see [Detecting application vulnerabilities in container ima
 
 ### `--exclude-node-modules`
 
-Allow disabling the scan of node_modules directories inside node.js container images; in CLI versions v1.1292.0 and higher, node_modules scanning is enabled by default.
+Allow disabling the scan of `node_modules` directories inside node.js container images.
 
-When the node_modules scan is disabled, snyk will report vulnerabilities for npm projects sourced from application file pairs: [package.json, package-lock.json], [package.json, yarn.lock].
+In CLI versions v1.1292.0 and higher, `node_modules` scanning is enabled by default.
+
+&#x20;When `node_modules` scanning is disabled, Snyk reports vulnerabilities for npm Projects sourced from application file pairs: `[package.json, package-lock.json], [package.json, yarn.lock]`.
 
 ### `--nested-jars-depth`
 

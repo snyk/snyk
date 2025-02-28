@@ -79,11 +79,11 @@ Example: `$ snyk container test --json-file-output=vuln.json`
 
 ### `--sarif`
 
-Return results in SARIF format.&#x20;
+Return results in SARIF format.
 
 ### `--sarif-file-output=<OUTPUT_FILE_PATH>`
 
-Save test output in SARIF format directly to the `<OUTPUT_FILE_PATH>` file, regardless of whether or not you use the `--sarif` option.&#x20;
+Save test output in SARIF format directly to the `<OUTPUT_FILE_PATH>` file, regardless of whether or not you use the `--sarif` option.
 
 This is especially useful if you want to display the human-readable test output using stdout and at the same time save the SARIF format output to a file.
 
@@ -118,9 +118,11 @@ In earlier releases, cannot be used with `--app-vulns`.
 
 ### `--exclude-node-modules`
 
-Allow disabling the scan of node_modules directories inside node.js container images; in CLI versions v1.1292.0 and higher, node_modules scanning is enabled by default.
+&#x20;Allow disabling the scan of `node_modules` directories inside node.js container images.
 
-When the node_modules scan is disabled, snyk will report vulnerabilities for npm projects sourced from application file pairs: [package.json, package-lock.json], [package.json, yarn.lock].
+In CLI versions v1.1292.0 and higher, `node_modules` scanning is enabled by default.
+
+&#x20;When `node_modules` scaning is disabled, Snyk reports vulnerabilities for npm Projects sourced from application file pairs: `[package.json, package-lock.json], [package.json, yarn.lock]`.
 
 ### `--nested-jars-depth`
 
