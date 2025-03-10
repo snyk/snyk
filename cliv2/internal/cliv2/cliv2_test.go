@@ -611,12 +611,17 @@ func Test_GetErrorFromFile(t *testing.T) {
 	err := os.WriteFile(validFilePath, jsonAPIErrorBytes, 0664)
 	assert.Nil(t, err)
 
+	noErrorBytes := []byte(`{"jsonapi":{"version":"1.0"},"errors":[]}`)
+	noErrorsFilePath := path.Join(t.TempDir(), "valid-err-file")
+	err = os.WriteFile(noErrorsFilePath, noErrorBytes, 0664)
+	assert.Nil(t, err)
+
 	notJsonBytes := []byte(`this is not a valid json`)
 	invalidFilePath := path.Join(t.TempDir(), "invalid-err-file")
 	err = os.WriteFile(invalidFilePath, notJsonBytes, 0664)
 	assert.Nil(t, err)
 
-	// notFoundFilePath := path.Join(t.TempDir(), "not-found-file")
+	notFoundFilePath := path.Join(t.TempDir(), "not-found-file")
 
 	jsonApiError, err := snyk_errors.FromJSONAPIErrorBytes(jsonAPIErrorBytes)
 	assert.Nil(t, err)
@@ -629,7 +634,7 @@ func Test_GetErrorFromFile(t *testing.T) {
 		sentErr, err := cliv2.GetErrorFromFile(exitCodeErr, validFilePath, config)
 
 		assert.Nil(t, sentErr)
-		assert.Nil(t, err)
+		assert.ErrorIs(t, err, cliv2.ErrIPCNotNeeded)
 	})
 
 	t.Run("does not send error for exit code 1", func(t *testing.T) {
@@ -637,11 +642,62 @@ func Test_GetErrorFromFile(t *testing.T) {
 		sentErr, err := cliv2.GetErrorFromFile(exitCodeErr, validFilePath, config)
 
 		assert.Nil(t, sentErr)
-		assert.Nil(t, err)
+		assert.ErrorIs(t, err, cliv2.ErrIPCNotNeeded)
+	})
+
+	t.Run("does not send error if the IPC was not used", func(t *testing.T) {
+		exitCodeErr := getExitError(2)
+		sentErr, err := cliv2.GetErrorFromFile(exitCodeErr, notFoundFilePath, config)
+
+		assert.Nil(t, sentErr)
+		assert.ErrorIs(t, err, cliv2.ErrIPCNoDataSent)
+	})
+
+	t.Run("does not send error if the file cannot be read", func(t *testing.T) {
+		exitCodeErr := getExitError(2)
+		sentErr, err := cliv2.GetErrorFromFile(exitCodeErr, t.TempDir(), config)
+
+		assert.Nil(t, sentErr)
+		assert.ErrorIs(t, err, cliv2.ErrIPCFailedToRead)
+	})
+
+	t.Run("does not send error if the IPC data cannot be deserialized", func(t *testing.T) {
+		exitCodeErr := getExitError(2)
+		sentErr, err := cliv2.GetErrorFromFile(exitCodeErr, invalidFilePath, config)
+
+		assert.Nil(t, sentErr)
+		assert.ErrorIs(t, err, cliv2.ErrIPCFailedToDeserialize)
+	})
+
+	t.Run("does not send error if the IPC data cannot be deserialized", func(t *testing.T) {
+		exitCodeErr := getExitError(2)
+		sentErr, err := cliv2.GetErrorFromFile(exitCodeErr, invalidFilePath, config)
+
+		assert.Nil(t, sentErr)
+		assert.ErrorIs(t, err, cliv2.ErrIPCFailedToDeserialize)
+	})
+
+	t.Run("does not send error if the IPC didnt send any errors", func(t *testing.T) {
+		exitCodeErr := getExitError(2)
+		sentErr, err := cliv2.GetErrorFromFile(exitCodeErr, noErrorsFilePath, config)
+
+		assert.Nil(t, sentErr)
+		assert.ErrorIs(t, err, cliv2.ErrIPCNoDataSent)
 	})
 
 	t.Run("sends error for exit code 2", func(t *testing.T) {
 		exitCodeErr := getExitError(2)
+		sentErr, err := cliv2.GetErrorFromFile(exitCodeErr, validFilePath, config)
+
+		snykErr := snyk_errors.Error{}
+		assert.ErrorIs(t, sentErr, exitCodeErr)
+		assert.ErrorAs(t, sentErr, &snykErr)
+		assert.Equal(t, snykErr.ErrorCode, jsonAPIError.ErrorCode)
+		assert.Nil(t, err)
+	})
+
+	t.Run("sends error for exit code 44", func(t *testing.T) {
+		exitCodeErr := getExitError(44)
 		sentErr, err := cliv2.GetErrorFromFile(exitCodeErr, validFilePath, config)
 
 		snykErr := snyk_errors.Error{}

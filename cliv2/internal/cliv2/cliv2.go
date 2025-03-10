@@ -68,6 +68,7 @@ const (
 )
 
 var (
+	ErrIPCNotNeeded           = errors.New("no IPC communication was needed")
 	ErrIPCNoDataSent          = errors.New("no data was sent through the IPC")
 	ErrIPCFailedToRead        = errors.New("error while reading IPC file")
 	ErrIPCFailedToDeserialize = errors.New("error while deserializing IPC file")
@@ -478,11 +479,11 @@ func (c *CLI) executeV1Default(proxyInfo *proxy.ProxyInfo, passThroughArgs []str
 
 func GetErrorFromFile(execErr error, errFilePath string, config configuration.Configuration) (data error, ipcReadErr error) {
 	if execErr == nil {
-		return nil, nil
+		return nil, ErrIPCNotNeeded
 	}
 
 	if exitErr, ok := execErr.(*exec.ExitError); ok && exitErr.ExitCode() < 2 {
-		return nil, nil
+		return nil, ErrIPCNotNeeded
 	}
 
 	bytes, fileErr := os.ReadFile(errFilePath)
@@ -513,7 +514,7 @@ func GetErrorFromFile(execErr error, errFilePath string, config configuration.Co
 		return errors.Join(errs...), nil
 	}
 
-	return execErr, ErrIPCNoDataSent
+	return nil, ErrIPCNoDataSent
 }
 
 func (c *CLI) Execute(proxyInfo *proxy.ProxyInfo, passThroughArgs []string) error {
